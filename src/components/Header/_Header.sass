@@ -1,17 +1,23 @@
 .Header
-  display: flex
-  flex-direction: row
-  align-items: center
-  color: #fbaa03
   border-bottom: 1px solid #fbaa03
-  background-color: rgba(0, 0, 0, 0.4)
-  height: 50px
+  background-color: rgba(0, 0, 0, 0.7)
+
+  &__container
+    display: flex
+    justify-content: space-between
+    align-items: center
 
   &__logo
-    font-size: 24px
-    padding-left: 5%
+    font-size: 17px
+    margin-left: 30px
     position: relative
-    font-family: HomemadeApple-Regular
+    font-family: HomemadeApple-Regular, 
+    // font-family: arial,helvetica,sans-serif
+    color: #fff
+    @media screen and ( max-width: 480px )
+      margin-left: 10px
+    span
+      color: #fbaa03
 
 @font-face
   font-family: 'HomemadeApple-Regular'

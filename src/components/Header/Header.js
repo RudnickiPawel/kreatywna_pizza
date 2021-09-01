@@ -5,11 +5,13 @@ import Menu from './Menu/Menu';
 const Header = () => {
   return (
     <div className='Header'>
-      <Hamburger />
-      <div className="Header__logo">
-        KreatywnaPizza  {/*style it later*/}
+      <div className="Header__container">
+        <div className="Header__logo">
+          Kreatywna<span>Pizza</span>
+        </div>
+        <Menu />
+        <Hamburger />
       </div>
-      <Menu />
     </div>
   )
 };

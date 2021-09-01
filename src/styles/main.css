@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,14 +7,6 @@ body {
   background-size: cover;
   background-position: 50% 0;
   background-repeat: no-repeat;
-  color: #fff;
-  background-color: black;
-}
-
-@media screen and (max-width: 1440px) {
-  body {
-    background-position: left;
-  }
 }
 
 code {
@@ -23,27 +14,38 @@ code {
 }
 
 .Header {
+  border-bottom: 1px solid #fbaa03;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.Header__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #fbaa03;
-  border-bottom: 1px solid #fbaa03;
-  background-color: rgba(0, 0, 0, 0.4);
-  height: 50px;
 }
 
 .Header__logo {
-  font-size: 24px;
-  padding-left: 5%;
+  font-size: 17px;
+  margin-left: 30px;
   position: relative;
   font-family: HomemadeApple-Regular;
+  color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+  .Header__logo {
+    margin-left: 10px;
+  }
+}
+
+.Header__logo span {
+  color: #fbaa03;
 }
 
 @font-face {
@@ -51,18 +53,154 @@ code {
   src: local("HomemadeApple"), url(../assets/HomemadeApple-Regular.ttf) format("truetype");
 }
 
-.Menu {
+.Hamburger {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 19px;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .Hamburger {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 30px 0 110px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Hamburger {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 10px;
+  }
+}
+
+.Hamburger:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.Hamburger:hover .Hamburger__line {
+  background-color: #fff;
+}
+
+.Hamburger__line {
   position: relative;
+  height: 3px;
+  width: 30px;
+  background-color: #fbaa03;
+}
+
+.Menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+  .Menu {
+    margin-left: auto;
+  }
+}
+
+.Menu__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .Menu__container {
+    position: absolute;
+    width: 300px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    right: 0;
+    top: 51px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Menu__container {
+    width: 100%;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    right: 0;
+    top: 39px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.Menu__container--hidden {
+  right: -100%;
 }
 
 .Menu__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-decoration: none;
   margin: 0;
-  padding: 0;
-  font-size: 20px;
+  padding: 13px 30px;
+  font-size: 18px;
+  font-weight: 600;
   color: #fbaa03;
+}
+
+@media screen and (max-width: 768px) {
+  .Menu__link {
+    height: auto;
+    padding: 20px 30px;
+  }
 }
 
 .Menu__link:hover {
   color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.Menu__link--order {
+  color: #000;
+  background-color: #fbaa03;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .Menu__link--order {
+    padding: 13px 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Menu__link--order {
+    padding: 7px 10px;
+  }
+}
+
+.Menu__link--order:hover {
+  background-color: rgba(251, 170, 3, 0.9);
 }

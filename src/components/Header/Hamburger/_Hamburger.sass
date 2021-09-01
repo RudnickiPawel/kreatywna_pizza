@@ -1,4 +1,22 @@
 .Hamburger
-  &__line
-  &__line1, &__line2, &__line3
+  display: none
+  flex-direction: column
+  justify-content: space-between
+  height: 19px
+  @media ( min-width: 481px ) and ( max-width: 768px )
+    display: flex
+    margin: 0 30px 0 110px
+  @media screen and ( max-width: 480px )
+    display: flex
+    margin: 0 10px
+  &:hover
+    cursor: pointer
+    background-color: rgba(255,255,255,0.1)
+    .Hamburger__line
+      background-color:#fff 
     
+  &__line
+    position: relative
+    height: 3px
+    width: 30px
+    background-color: #fbaa03

@@ -1,10 +1,52 @@
 .Menu
-  position: relative
+  display: flex
+  height: 100%
+  transition: all 2s ease-out
+  @media screen and ( max-width: 768px )
+    margin-left: auto
+
+  &__container
+    display: flex
+    transition: all 0.2s ease-out
+    @media ( min-width: 481px ) and ( max-width: 768px )
+      position: absolute
+      width: 300px
+      flex-direction: column
+      right: 0
+      top: 51px
+      background-color: rgba(0, 0, 0, 0.7)
+    @media screen and ( max-width: 480px )
+      width: 100%
+      position: absolute
+      flex-direction: column
+      right: 0
+      top: 39px
+      background-color: rgba(0, 0, 0, 0.7)
+    &--hidden
+      right: -100%
+
   &__link
+    display: flex
+    align-items: center
+    justify-content: center
     text-decoration: none
     margin: 0
-    padding: 0
-    font-size: 20px
+    padding: 13px 30px
+    font-size: 18px
+    font-weight: 600
     color: #fbaa03
+    @media screen and ( max-width: 768px )
+      height: auto
+      padding: 20px 30px
     &:hover
       color: #fff
+      background-color: rgba(255,255,255,0.1)
+    &--order
+      color: #000
+      background-color: #fbaa03
+      @media ( min-width: 481px ) and ( max-width: 768px )
+        padding: 13px 30px
+      @media screen and ( max-width: 480px )
+        padding: 7px 10px
+      &:hover
+        background-color: rgba(251, 170, 3, 0.9)
