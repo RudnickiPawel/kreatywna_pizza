@@ -1,13 +1,14 @@
 import '../../../styles/main.css';
+import { handleLinkClick } from '../../../utils';
 
 const Menu = (props) => {
   return (
     <div className='Menu'>
-      <a onClick={e => {props.click(e, 'Order')}} href="/" className="Menu__link Menu__link--order">ZAMÓW</a>
+      <a onClick={e => {handleLinkClick(e, 'Order', props.section)}} href="/" className="Menu__link Menu__link--order">ZAMÓW</a>
       <div className="Menu__container">
-        <a onClick={e => {props.click(e, 'Recommended')}} href="/" className="Menu__link">POLECANE</a>
-        <a onClick={e => {props.click(e, 'About')}} href="/" className="Menu__link">O NAS</a>
-        <a onClick={e => {props.click(e, 'Career')}} href="/" className="Menu__link">PRACA</a>
+        <a onClick={e => {handleLinkClick(e, 'Recommended', props.section)}} href="/" className="Menu__link">POLECANE</a>
+        <a onClick={e => {handleLinkClick(e, 'About', props.section)}} href="/" className="Menu__link">O NAS</a>
+        <a onClick={e => {handleLinkClick(e, 'Career', props.section)}} href="/" className="Menu__link">PRACA</a>
       </div>
     </div>
   )

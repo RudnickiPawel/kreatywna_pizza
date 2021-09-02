@@ -1,4 +1,3 @@
-import './styles/main.css';
 import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -17,7 +16,7 @@ const Layout = () => {
   return (
     <div className="Layout">
       <Header section={handleSetState} />
-      {state.which === 'Main' ? <Main /> : state.which === 'Order' ? <Order /> : state.which === 'About' ? <About /> : state.which === 'Career' ? <Career />: state.which === 'Recommended' ? <Recommended /> : null}
+      {state.which === 'Main' ? <Main section={handleSetState}/> : state.which === 'Order' ? <Order section={handleSetState}/> : state.which === 'About' ? <About section={handleSetState}/> : state.which === 'Career' ? <Career section={handleSetState}/>: state.which === 'Recommended' ? <Recommended section={handleSetState}/> : null}
 
     </div>
   );

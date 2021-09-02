@@ -2,7 +2,7 @@ import '../../styles/main.css';
 
 const Recommended = (props) => {
   return (
-    <div className='Recommended'>
+    <div className='Recommended global__section'>
       {/* <p>{props.which}</p> */}
     </div>
   );

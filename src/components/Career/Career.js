@@ -2,7 +2,7 @@ import '../../styles/main.css';
 
 const Career = (props) => {
   return (
-    <div className='Career'>
+    <div className='Career global__section'>
       {/* <p>{props.which}</p> */}
     </div>
   );
