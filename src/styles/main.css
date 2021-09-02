@@ -31,6 +31,7 @@ code {
 }
 
 .Header__logo {
+  text-decoration: none;
   font-size: 17px;
   margin-left: 30px;
   position: relative;
