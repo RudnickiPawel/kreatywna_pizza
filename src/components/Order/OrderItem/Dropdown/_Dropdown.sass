@@ -1,0 +1,21 @@
+.Dropdown
+  width: 50px
+  margin-left: auto
+  // background-color: #fff
+  color: #fbaa03
+  &__container
+    position: absolute
+    
+  &__option
+    display: none
+    position: absolute
+    font-size: 18px
+    z-index: 1
+    &:hover
+      background-color: red
+
+  .active
+    display: block
+    position: relative
+    background-color: #fff
+    z-index: 2

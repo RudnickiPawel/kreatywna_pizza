@@ -38,6 +38,7 @@ code {
 .section__title {
   font-size: 34px;
   padding: 30px 0;
+  color: #fbaa03;
 }
 
 .section__paragraph {
@@ -249,4 +250,86 @@ code {
 
 .Menu__link--order:hover {
   background-color: rgba(251, 170, 3, 0.9);
+}
+
+.Order__list {
+  width: 800px;
+  height: 400px;
+  background-color: #000;
+}
+
+.Order__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.OrderItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 24px;
+  border: 1px solid #fbaa03;
+  padding: 10px 20px;
+  min-width: 800px;
+  width: 100%;
+  background-color: #000;
+}
+
+.OrderItem__name {
+  font-weight: 600;
+}
+
+.OrderItem__value {
+  width: 40px;
+  text-align: center;
+}
+
+.OrderItem__increment {
+  padding: 0 10px;
+}
+
+.OrderItem__decrement {
+  padding: 0 10px;
+}
+
+.OrderItem__sizes {
+  position: relative;
+  background-color: green;
+}
+
+.OrderItem__size {
+  display: none;
+}
+
+.Dropdown {
+  width: 50px;
+  margin-left: auto;
+  color: #fbaa03;
+}
+
+.Dropdown__container {
+  position: absolute;
+}
+
+.Dropdown__option {
+  display: none;
+  position: absolute;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.Dropdown__option:hover {
+  background-color: red;
+}
+
+.Dropdown .active {
+  display: block;
+  position: relative;
+  background-color: #fff;
+  z-index: 2;
 }

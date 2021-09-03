@@ -8,16 +8,18 @@ import Recommended from './components/Recommended/Recommended';
 
 const Layout = () => {
   //state stores the name of component that needs to be shown
-  const [state, setstate] = useState({ which: 'Main' });
-  const handleSetState = (r) => {
-    setstate({ which: r });
+  const [state, setstate] = useState('Main');
+  const handleSectionChange = (r) => {
+    setstate(r);
+    // throw new Error('ayyy lmao');
+    //TODO: Error Boundary
   };
+
 
   return (
     <div className="Layout">
-      <Header section={handleSetState} />
-      {state.which === 'Main' ? <Main section={handleSetState}/> : state.which === 'Order' ? <Order section={handleSetState}/> : state.which === 'About' ? <About section={handleSetState}/> : state.which === 'Career' ? <Career section={handleSetState}/>: state.which === 'Recommended' ? <Recommended section={handleSetState}/> : null}
-
+      <Header section={handleSectionChange} />
+      {state === 'Main' ? <Main section={handleSectionChange} /> : state === 'Order' ? <Order section={handleSectionChange} /> : state === 'About' ? <About section={handleSectionChange} /> : state === 'Career' ? <Career section={handleSectionChange} /> : state === 'Recommended' ? <Recommended section={handleSectionChange} /> : null}
     </div>
   );
 }
