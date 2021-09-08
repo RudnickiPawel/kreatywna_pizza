@@ -5,25 +5,33 @@
   @media screen and ( max-width: 768px )
     margin-left: auto
 
+  &__wrapper
+    @media ( min-width: 481px ) and ( max-width: 768px )
+      width: 300px
+      height: 192px
+      position: absolute
+      top: 51px
+      right: 0
+      overflow: hidden
+    @media screen and ( max-width: 480px )
+      width: 100%
+      position: absolute
+      right: 0
+      top: 39px
   &__container
     display: flex
-    transition: all 0.2s ease-out
     @media ( min-width: 481px ) and ( max-width: 768px )
       position: absolute
-      width: 300px
+      width: 100%
       flex-direction: column
-      right: 0
-      top: 51px
       background-color: rgba(0, 0, 0, 0.7)
     @media screen and ( max-width: 480px )
       width: 100%
       position: absolute
       flex-direction: column
-      right: 0
-      top: 39px
       background-color: rgba(0, 0, 0, 0.7)
     &--hidden
-      right: -100%
+      right: -300px
 
   &__link
     display: flex
