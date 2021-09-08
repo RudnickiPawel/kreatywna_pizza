@@ -304,6 +304,9 @@ code {
   background-color: #000;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 @media screen and (max-width: 500px) {
@@ -338,17 +341,23 @@ code {
 .OrderItem__send {
   background-color: #fbaa03;
   color: #000;
-  padding: 0 10px;
+  padding: 5px 10px;
   border-radius: 7%;
-  margin-right: 5%;
+  margin: 0 5%;
   max-width: 100px;
   width: 100%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
   .OrderItem__send {
     margin: 0;
   }
+}
+
+.OrderItem__send:hover {
+  color: #fff;
+  background-color: rgba(251, 170, 3, 0.9);
 }
 
 .OrderItem__select {

@@ -1,4 +1,3 @@
-// import { render } from '@testing-library/react';
 import { useState } from 'react';
 import Select from 'react-select';
 
@@ -14,26 +13,36 @@ const OrderItem = (props) => {
     menu: (provided, state) => ({
       ...provided,
       width: state.selectProps.width,
-      color: 'red',
     }),
     option: (provided, state) => ({
-      // ...provided,
-      // borderBottom: '1px dotted pink',
+      ...provided,
+      borderBottom: '2px dotted rgba(0,0,0,0.1)',
       color: state.isSelected ? '#fbaa03' : '#000',
-      // padding: 20,
-      // width: 300,
+      backgroundColor: state.isSelected ? 'rgba(0,0,0,0.1)' : 'inherit',
+      cursor: 'pointer',
+      "&:hover": {
+        color: '#fbaa03'
+      },
     }),
     control: (_, { selectProps: { width } }) => ({
       width: width,
-      display: 'flex'
+      display: 'flex',
+      cursor: 'pointer',
+      "&:hover": {
+        backgroundColor: 'rgba(255,255,255,0.2)'
+      },
     }),
-    singleValue: (provided, state) => {
-      //   const opacity = state.isDisabled ? 0.5 : 1;
-      //   const transition = 'opacity 300ms';
-      return;
-      //   return { ...provided, opacity, transition };
-    }
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: '#fbaa03',
+    }),
+    valueContainer: (provided, state) => ({
+      ...provided,
+      color: '#fbaa03',
+      justifyContent: 'center',
+    })
   }
+
   const handleChange = selectedOption => {
     setState({ selectedOption });
   };

@@ -41,7 +41,6 @@ const Order = (props) => {
       document.getElementsByClassName('Order__selected')[0].appendChild(newOrderLine);
     }
     else if (orderedSimilar) {
-      // let dummyState = [...order];
       let objIndex = dummyState.findIndex((obj => obj.name === name && obj.size === size));
       if (dummyState[objIndex].count < 50) {
         dummyState[objIndex].count += 1;
