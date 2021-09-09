@@ -4,25 +4,34 @@ import { useState, useEffect } from 'react';
 
 const Order = (props) => {
   // let responseJSON, error;
+  const [componentPrices, setComponentPrices] = useState(null);
+  const [pizzasComponents, setPizzasComponents] = useState(null);
   useEffect(() => {
-    const fetchData = () => {
+    const fetchComponents = () => {
       fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/components.json')
-      .then((response) => {
-        // error = response.body;
-        console.log(response.json());
-        // return response.json();
-      })
-      // .then((data) => {
-        
-      // });
-      // error = response.status;
-    }
-    fetchData();
-  }, [])
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          setComponentPrices(data);
+        });
+    };
+    const fetchPizzas = () => {
+      fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json')
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          setPizzasComponents(data);
+        });
+    };
+    fetchComponents();
+    fetchPizzas();
+  }, []);
   const [order, setOrder] = useState([]);
   const handleNewOrder = (newOrder) => {
-    const name = newOrder.name;
-    const size = newOrder.size;
+    const {name, size} = newOrder;
+    const price = new Number(newOrder.price);
     const dummyState = [...order];
     let orderedSimilar = false;
     const newOrderClassName = name + '__' + size;
@@ -34,19 +43,21 @@ const Order = (props) => {
     if (!orderedSimilar) {
       newOrder.count = 1;
       setOrder((prevState) => [...prevState, newOrder]);
-      const line = name + ' ' + size + 'cm ' + newOrder.count + 'sztuk';
+      const line = name + ' ' + size + 'cm, ' + newOrder.count + ' sztuk, cena: ' + price.toFixed(2) + ' zł';
       let newOrderLine = document.createElement('p');
       newOrderLine.className = newOrderClassName;
       newOrderLine.innerText = line;
       document.getElementsByClassName('Order__selected')[0].appendChild(newOrderLine);
     }
-    else if (orderedSimilar) {
-      let objIndex = dummyState.findIndex((obj => obj.name === name && obj.size === size));
-      if (dummyState[objIndex].count < 50) {
-        dummyState[objIndex].count += 1;
+    else if (orderedSimilar) { //if this specific pizza name and size is already in state(not custom pizza)
+      let objIndex = dummyState.findIndex((obj => obj.name === name && obj.size === size)); //find specific order
+      if (dummyState[objIndex].count < 50) { //if amount of orders doesnt exceed the limit
+        dummyState[objIndex].count += 1; //count this one
+        // console.log(typeof dummyState[objIndex].price);
+        dummyState[objIndex].price = (Number(dummyState[objIndex].price) + price);
         // console.log("After update: ", dummyState[objIndex])
         setOrder(dummyState);
-        document.getElementsByClassName(newOrderClassName)[0].innerText = name + ' ' + size + 'cm ' + dummyState[objIndex].count + ' sztuk';
+        document.getElementsByClassName(newOrderClassName)[0].innerText = name + ' ' + size + 'cm, ' + dummyState[objIndex].count + ' sztuk, cena: ' + (dummyState[objIndex].price).toFixed(2) + ' zł';
       }
       else
         alert('Przepraszamy, ale nie przyjmujemy zamówień liczących więcej niz 50 sztuk danej pizzy.');
@@ -63,16 +74,17 @@ const Order = (props) => {
           {/* filled dynamically */}
         </div>
       </div>
-      <div className='Order__container'>
-        <OrderItem order={handleNewOrder} name='margherita' />
-        <OrderItem order={handleNewOrder} name='pepperoni' />
-        <OrderItem order={handleNewOrder} name='hawajska' />
-        <OrderItem order={handleNewOrder} name='carbonara' />
-        <OrderItem order={handleNewOrder} name='vesuvio' />
-        <OrderItem order={handleNewOrder} name='capricciosa' />
-        <OrderItem order={handleNewOrder} name='vegetariana' />
-      </div>
-
+      {pizzasComponents ?
+        <div className='Order__container'>
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.margherita} componentPrices={componentPrices} name='margherita' />
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.pepperoni} componentPrices={componentPrices} name='pepperoni' />
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.hawajska} componentPrices={componentPrices} name='hawajska' />
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.carbonara} componentPrices={componentPrices} name='carbonara' />
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.vesuvio} componentPrices={componentPrices} name='vesuvio' />
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.capricciosa} componentPrices={componentPrices} name='capricciosa' />
+          <OrderItem order={handleNewOrder} pizzaComponents={pizzasComponents.vegetariana} componentPrices={componentPrices} name='vegetariana' />
+        </div>
+        : 'Wczytywanie...'}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 
 const OrderItem = (props) => {
   const options = [
@@ -45,11 +45,33 @@ const OrderItem = (props) => {
 
   const handleChange = selectedOption => {
     setState({ selectedOption });
+
+  };
+  const calculatePrice = (pizzaComponents, componentPrices, size) => {
+    let comps = pizzaComponents.split(', ');
+    let price = 10; //base price
+    comps.forEach(comp => {
+      // console.log();
+      // console.log(componentPrices.comp)
+      // comps[index] = comp.trimStart();
+      price += componentPrices[comp];
+    });
+    if(size.value === 40)
+      price *= 1.3;
+    else if(size.value === 50)
+      price *= 1.8;
+    else if(size.value === 60)
+      price *= 2.5;
+    // setState(price.toFixed(2));
+    return price.toFixed(2);
   };
 
-  const [state, setState] = useState({ selectedOption: null });
+  const [state, setState] = useState({ selectedOption: null});
   const { selectedOption } = state;
   const itemname = props.name;
+  let price;
+  if(selectedOption)
+    price = calculatePrice(props.pizzaComponents, props.componentPrices, selectedOption);
 
   return (
     <div className={'OrderItem ' + itemname}>
@@ -64,16 +86,18 @@ const OrderItem = (props) => {
           options={options}
         />
       </div>
-      <div onClick={() => { handleAddToList(props.order, selectedOption, itemname) }} className='OrderItem__send'>Dodaj</div>
+      <p className="OrderItem__price">{selectedOption ? price + ' zł': null}</p>
+      <div onClick={() => { handleAddToList(props.order, selectedOption, itemname, price) }} className='OrderItem__send'>Dodaj</div>
     </div>
   );
 }
 
-const handleAddToList = (order, size, name) => {
+const handleAddToList = (order, size, name, price) => {
   if (size) {
     const output = {
       name: name,
-      size: size.value
+      size: size.value,
+      price: price
     }
     order(output);
   }
