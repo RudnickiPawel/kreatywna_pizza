@@ -7,7 +7,7 @@
   background-color: #000
   box-sizing: border-box
   align-items: center
-  @media screen and ( max-width: 500px )
+  @media screen and ( max-width: 590px )
     flex-direction: column
     align-items: center
 
@@ -15,7 +15,7 @@
     font-weight: 600
     color: #fbaa03
     margin-left: 5%
-    @media screen and ( max-width: 500px )
+    @media screen and ( max-width: 590px )
       margin: 0
 
   &__value
@@ -31,7 +31,8 @@
     max-width: 100px
     width: 100%
     cursor: pointer
-    @media screen and ( max-width: 500px )
+    transition: all 0.2s ease-out
+    @media screen and ( max-width: 590px )
       margin: 0
     &:hover
       color: #fff
@@ -40,5 +41,8 @@
   &__select
     width: 140px
     margin-left: auto
-    @media screen and ( max-width: 500px )
+    @media screen and ( max-width: 590px )
       margin: 10px auto
+
+  &__price
+    margin: 0

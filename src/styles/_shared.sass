@@ -11,7 +11,7 @@
   padding-bottom: 60px
   color: rgba(255, 255, 255, 0.9)
   // color: #fbaa03
-  
+
   &__title
     font-size: 34px
     padding: 30px 0
@@ -30,3 +30,18 @@
 
 .colorOrange
   color: #fbaa03
+
+.button-animated
+  -webkit-animation-name: buttonClicked
+  -webkit-animation-duration: 0.2s
+  -webkit-animation-iteration-count: 1
+  -webkit-animation-timing-function: ease
+  -webkit-animation-fill-mode: forwards
+
+@keyframes buttonClicked
+  0%    
+    transform: scale(1)
+  50%   
+    transform: scale(1.1)
+  100%  
+    transform: scale(1)

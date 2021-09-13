@@ -59,6 +59,44 @@ code {
   color: #fbaa03;
 }
 
+.button-animated {
+  -webkit-animation-name: buttonClicked;
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes buttonClicked {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes buttonClicked {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
 .Header {
   border-bottom: 1px solid #fbaa03;
   background-color: rgba(0, 0, 0, 0.7);
@@ -298,13 +336,20 @@ code {
           flex-direction: column;
   height: 300px;
   background-color: rgba(255, 255, 255, 0.8);
+  overflow-y: scroll;
 }
 
-.Order__selected p {
+.Order__selected div {
   color: #000;
-  font-weight: 800;
-  font-size: 24px;
+  font-weight: 700;
+  font-size: 22px;
   margin: 0;
+}
+
+.Order__line {
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fbaa03));
+  background: linear-gradient(#fff 0%, #fbaa03 100%);
+  border: 3px solid black;
 }
 
 .OrderItem {
@@ -323,7 +368,7 @@ code {
           align-items: center;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 590px) {
   .OrderItem {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -341,7 +386,7 @@ code {
   margin-left: 5%;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 590px) {
   .OrderItem__name {
     margin: 0;
   }
@@ -361,9 +406,11 @@ code {
   max-width: 100px;
   width: 100%;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 590px) {
   .OrderItem__send {
     margin: 0;
   }
@@ -379,10 +426,14 @@ code {
   margin-left: auto;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 590px) {
   .OrderItem__select {
     margin: 10px auto;
   }
+}
+
+.OrderItem__price {
+  margin: 0;
 }
 
 .Dropdown {
