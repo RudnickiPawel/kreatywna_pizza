@@ -17,24 +17,28 @@
     background-color: rgba(255,255,255, 0.8)
     overflow-y: scroll
     position: relative
+    border: 1px solid #fbaa03
 
   &__line
     background: linear-gradient( #fff 0%, #fbaa03 100%)
-    border: 3px solid black
+    border-bottom: 3px solid black
     cursor: pointer
     color: #000
     font-weight: 700
     font-size: 22px
     margin: 0
+    @media screen and ( max-width: 480px )
+      font-size: 16px
+      
     &:hover
       background: linear-gradient( #fbaa03 0%, #fff 100%)
 
   &__price
-    position: absolute
-    right: 0
-    bottom: 0
+    // position: absolute
+    // right: 0
+    // bottom: 0
     color: #fbaa03
     font-size: 34px
-    padding: 0 15px
+    // padding: 0 15px
     background-color: #000
     border: 1px solid #fbaa03

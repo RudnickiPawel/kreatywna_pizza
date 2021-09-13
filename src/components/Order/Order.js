@@ -1,5 +1,6 @@
 import '../../styles/main.css';
 import OrderItem from './OrderItem/OrderItem';
+import OrderCustom from './OrderCustom/OrderCustom';
 import { useState, useEffect } from 'react';
 
 const Order = (props) => {
@@ -102,8 +103,8 @@ const Order = (props) => {
               <div onClick={() => handleRemoveFromOrder(order)} key={order.name + '__' + order.size} className='Order__line'> {order.name + ' ' + order.size + 'cm, ' + order.count + ' sztuk, cena: ' + order.price + 'zł'}</div>
             ) : null
           }
-          <div className="Order__price">Suma: {(Math.round(totalPrice * 100) / 100).toFixed(2)} zł</div>
         </div>
+        <div className="Order__price">Suma: {(Math.round(totalPrice * 100) / 100).toFixed(2)} zł</div>
       </div>
       {
         pizzasComponents ?
@@ -115,6 +116,7 @@ const Order = (props) => {
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vesuvio} componentPrices={componentPrices} name='vesuvio' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.capricciosa} componentPrices={componentPrices} name='capricciosa' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vegetariana} componentPrices={componentPrices} name='vegetariana' />
+            <OrderCustom />
           </div>
           : 'Wczytywanie...'
       }
