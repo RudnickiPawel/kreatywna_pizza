@@ -1,2 +1,42 @@
 .OrderCustom
-  
+  display: flex
+  font-size: 24px
+  border: 1px solid #fbaa03
+  padding: 10px 0
+  width: 100%
+  background-color: #000
+  box-sizing: border-box
+  align-items: center
+  flex-wrap: wrap
+  @media screen and ( max-width: 590px )
+    flex-direction: column
+    align-items: center
+  &__name
+    font-weight: 600
+    // color: #fbaa03
+    margin-left: 5%
+    color: #fff
+    @media screen and ( max-width: 590px )
+      margin: 0
+  &__components
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    margin-top: 20px
+  &__component
+    // width: 25%
+    width: 100px
+    padding: 20px
+    // margin-bottom: 20px
+    cursor: pointer
+    color: #fbaa03
+    &:hover
+      color: #fff
+      background-color: rgba(#fbaa03, 0.9)
+
+  &__componentName
+    font-size: 14px
+
+  &__componentImage
+    width: 50px
+    height: 50px

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Select, { components } from 'react-select';
+import Select from 'react-select';
 
 const OrderItem = (props) => {
   const options = [
@@ -45,7 +45,6 @@ const OrderItem = (props) => {
 
   const handleChange = selectedOption => {
     setState({ selectedOption });
-
   };
   const calculatePrice = (pizzaComponents, componentPrices, size) => {
     let comps = pizzaComponents.split(', ');
@@ -70,10 +69,6 @@ const OrderItem = (props) => {
   if (selectedOption)
     price = calculatePrice(props.pizzaComponents, props.componentPrices, selectedOption);
 
-  const handleAnimationEnded = (setAnimateBtn) => {
-    setAnimateBtn(false);
-  };
-
   return (
     <div className={'OrderItem ' + itemname}>
       <div className='OrderItem__name'>{itemname.toUpperCase()}</div>
@@ -88,7 +83,7 @@ const OrderItem = (props) => {
         />
       </div>
       <p className="OrderItem__price">{selectedOption ? price + ' zł' : null}</p>
-      <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, itemname, price) }} onAnimationEnd={() => { handleAnimationEnded(setAnimateBtn) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
+      <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, itemname, price) }} onAnimationEnd={() => {setAnimateBtn(false)}} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
     </div>
   );
 }

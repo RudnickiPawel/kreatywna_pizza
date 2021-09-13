@@ -116,7 +116,8 @@ const Order = (props) => {
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vesuvio} componentPrices={componentPrices} name='vesuvio' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.capricciosa} componentPrices={componentPrices} name='capricciosa' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vegetariana} componentPrices={componentPrices} name='vegetariana' />
-            <OrderCustom />
+            {/* <OrderItem order={handleOrder} pizzaComponents={pizzasComponents} componentPrices={componentPrices} name='custom' /> */}
+            <OrderCustom componentPrices={componentPrices}/>
           </div>
           : 'Wczytywanie...'
       }
