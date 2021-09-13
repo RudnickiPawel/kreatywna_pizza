@@ -6,6 +6,12 @@ const Order = (props) => {
   // let responseJSON, error;
   const [componentPrices, setComponentPrices] = useState(null);
   const [pizzasComponents, setPizzasComponents] = useState(null);
+  const [orders, setOrders] = useState([]);
+  let totalPrice = 0.00;
+  orders.map(order => {
+    totalPrice += parseFloat(order.price);
+    return null;
+  });
   useEffect(() => {
     const fetchComponents = () => {
       fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/components.json')
@@ -28,7 +34,6 @@ const Order = (props) => {
     fetchComponents();
     fetchPizzas();
   }, []);
-  const [orders, setOrders] = useState([]);
   const handleOrder = (newOrder) => {
     //   const { name, size } = newOrder;
     //   const price = parseFloat(newOrder.price);
@@ -97,6 +102,7 @@ const Order = (props) => {
               <div onClick={() => handleRemoveFromOrder(order)} key={order.name + '__' + order.size} className='Order__line'> {order.name + ' ' + order.size + 'cm, ' + order.count + ' sztuk, cena: ' + order.price + 'zł'}</div>
             ) : null
           }
+          <div className="Order__price">Suma: {(Math.round(totalPrice * 100) / 100).toFixed(2)} zł</div>
         </div>
       </div>
       {
