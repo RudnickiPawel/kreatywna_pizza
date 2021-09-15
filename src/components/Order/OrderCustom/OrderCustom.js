@@ -1,6 +1,25 @@
 import { useState } from 'react';
 import Select from 'react-select';
-import pineapple from '../../../assets/pineapple.jfif';
+import ananas from '../../../assets/ananas.jfif';
+import boczek from '../../../assets/boczek.jfif';
+import cebula from '../../../assets/cebula.jfif';
+import drób from '../../../assets/drób.png';
+import kukurydza from '../../../assets/kukurydza.jfif';
+import mozarella from '../../../assets/mozarella.jpg';
+import oliwki from '../../../assets/oliwki.jpg';
+import oregano from '../../../assets/oregano.jpg';
+import papryka from '../../../assets/papryka.jpg';
+import pepperoni from '../../../assets/pepperoni.jfif';
+import pieczarki from '../../../assets/pieczarki.jpg';
+import rukola from '../../../assets/rukola.jfif';
+import sosczosnkowy from '../../../assets/sos czosnkowy.jpg';
+import sosketchupowy from '../../../assets/ketchup.jpg';
+import sosmajonezowy from '../../../assets/majonez.jpg';
+import sospomidorowy from '../../../assets/pomidorowy.jpg';
+import sossmietanowy from '../../../assets/smietana.jpg';
+import szynka from '../../../assets/szynka.jpg';
+import wieprzowina from '../../../assets/wieprzowina.jpg';
+import wołowina from '../../../assets/wołowina.jpg';
 
 const OrderCustom = (props) => {
   const options = [
@@ -90,7 +109,7 @@ const OrderCustom = (props) => {
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, props.name, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
       {/* <div className="OrderCustom__component"></div> */}
       <div className='OrderCustom__components'>
-        {componentNames ? componentNames.map((componentName, index) => <div key={index} className='OrderCustom__component'><img className='OrderCustom__componentImage' src={pineapple} alt='' /><div className='OrderCustom__componentName'>{componentName}</div></div>) : null}
+        {componentNames ? componentNames.map((componentName, index) => <div key={index} className='OrderCustom__component'><img className='OrderCustom__componentImage' src={ananas} alt='' /><div className='OrderCustom__componentName'>{componentName}</div></div>) : null}
       </div>
     </div>
   );
