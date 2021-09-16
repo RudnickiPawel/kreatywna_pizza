@@ -1,27 +1,28 @@
 import { useState } from 'react';
 import Select from 'react-select';
-import ananas from '../../../assets/ananas.jfif';
-import boczek from '../../../assets/boczek.jfif';
-import cebula from '../../../assets/cebula.jfif';
-import drób from '../../../assets/drób.png';
-import kukurydza from '../../../assets/kukurydza.jfif';
-import mozarella from '../../../assets/mozarella.jpg';
-import oliwki from '../../../assets/oliwki.jpg';
-import oregano from '../../../assets/oregano.jpg';
-import papryka from '../../../assets/papryka.jpg';
-import pepperoni from '../../../assets/pepperoni.jfif';
-import pieczarki from '../../../assets/pieczarki.jpg';
-import rukola from '../../../assets/rukola.jfif';
-import sosczosnkowy from '../../../assets/sos czosnkowy.jpg';
-import sosketchupowy from '../../../assets/ketchup.jpg';
-import sosmajonezowy from '../../../assets/majonez.jpg';
-import sospomidorowy from '../../../assets/pomidorowy.jpg';
-import sossmietanowy from '../../../assets/smietana.jpg';
-import szynka from '../../../assets/szynka.jpg';
-import wieprzowina from '../../../assets/wieprzowina.jpg';
-import wołowina from '../../../assets/wołowina.jpg';
+// import ananas from '../../../assets/ananas.jpg';
+// import boczek from '../../../assets/boczek.jpg';
+// import cebula from '../../../assets/cebula.jpg';
+// import drób from '../../../assets/drób.jpg';
+// import kukurydza from '../../../assets/kukurydza.jpg';
+// import mozarella from '../../../assets/mozarella.jpg';
+// import oliwki from '../../../assets/oliwki.jpg';
+// import oregano from '../../../assets/oregano.jpg';
+// import papryka from '../../../assets/papryka.jpg';
+// import pepperoni from '../../../assets/pepperoni.jpg';
+// import pieczarki from '../../../assets/pieczarki.jpg';
+// import rukola from '../../../assets/rukola.jpg';
+// import sosczosnkowy from '../../../assets/sosczosnkowy.jpg';
+// import sosketchupowy from '../../../assets/sosketchupowy.jpg';
+// import sosmajonezowy from '../../../assets/sosmajonezowy.jpg';
+// import sospomidorowy from '../../../assets/sospomidorowy.jpg';
+// import sosśmietanowy from '../../../assets/sosśmietanowy.jpg';
+// import szynka from '../../../assets/szynka.jpg';
+// import wieprzowina from '../../../assets/wieprzowina.jpg';
+// import wołowina from '../../../assets/wołowina.jpg';
 
 const OrderCustom = (props) => {
+    // const pizzaComponents = ;
   const options = [
     { value: 30, label: '30cm' },
     { value: 40, label: '40cm' },
@@ -88,8 +89,9 @@ const OrderCustom = (props) => {
   const componentPrices = props.componentPrices;
   let componentNames;
   if (componentPrices) {
-    // console.log();
+    // console.log();props.pizzaComponents.replace(/\s/g, '').split(',')
     componentNames = Object.keys(componentPrices);
+    componentNames = componentNames.map(comp => {return comp.replace(/\s/g, '')});
     // componentNames = [...componentNames];
   }
   let price = 0;
@@ -109,7 +111,7 @@ const OrderCustom = (props) => {
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, props.name, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
       {/* <div className="OrderCustom__component"></div> */}
       <div className='OrderCustom__components'>
-        {componentNames ? componentNames.map((componentName, index) => <div key={index} className='OrderCustom__component'><img className='OrderCustom__componentImage' src={ananas} alt='' /><div className='OrderCustom__componentName'>{componentName}</div></div>) : null}
+        {componentNames ? componentNames.map((componentName, index) => <div key={index} className='OrderCustom__component'><img className='OrderCustom__componentImage' src={require('../../../assets/' + componentName + '.jpg').default} alt='' /><div className='OrderCustom__componentName'>{componentName}</div></div>) : null}
       </div>
     </div>
   );

@@ -361,8 +361,8 @@ code {
 }
 
 .Order__line:hover {
-  background: -webkit-gradient(linear, left top, left bottom, from(#fbaa03), to(#fff));
-  background: linear-gradient(#fbaa03 0%, #fff 100%);
+  background: #fff;
+  color: red;
 }
 
 .Order__price {
@@ -386,6 +386,8 @@ code {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 @media screen and (max-width: 590px) {
@@ -454,6 +456,29 @@ code {
 
 .OrderItem__price {
   margin: 0;
+}
+
+.OrderItem__components {
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0% 5%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.OrderItem__component {
+  width: 25%;
+}
+
+.OrderItem__componentName {
+  font-size: 14px;
+}
+
+.OrderItem__image {
+  width: 50px;
+  height: 50px;
 }
 
 .Dropdown {
