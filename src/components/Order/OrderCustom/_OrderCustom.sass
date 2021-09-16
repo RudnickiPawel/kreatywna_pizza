@@ -13,30 +13,47 @@
     align-items: center
   &__name
     font-weight: 600
-    // color: #fbaa03
     margin-left: 5%
     color: #fff
     @media screen and ( max-width: 590px )
       margin: 0
   &__components
+    width: 90%
     display: flex
+    margin: 0% 5%
     flex-wrap: wrap
-    justify-content: center
     margin-top: 20px
   &__component
+    width: 20%
+    // padding: 5% 5%
+    margin-bottom: 5%
     // width: 25%
-    width: 100px
-    padding: 20px
+    // width: 100px
+    // padding: 20px
     // margin-bottom: 20px
     cursor: pointer
-    color: #fbaa03
     &:hover
       color: #fff
       background-color: rgba(#fbaa03, 0.9)
 
   &__componentName
     font-size: 14px
+    color: #fbaa03
 
   &__componentImage
     width: 50px
     height: 50px
+    border-radius: 11%
+
+  &__amount
+    width: 30%
+    &::-webkit-inner-spin-button
+      -webkit-appearance: none
+
+  &__icon
+    width: 50px
+    height: 50px
+    &--minus
+      background-color: red
+    &--plus
+      background-color: green

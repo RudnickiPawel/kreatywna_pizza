@@ -4,7 +4,6 @@ import OrderCustom from './OrderCustom/OrderCustom';
 import { useState, useEffect } from 'react';
 
 const Order = (props) => {
-  // let responseJSON, error;
   const [componentPrices, setComponentPrices] = useState(null);
   const [pizzasComponents, setPizzasComponents] = useState(null);
   const [orders, setOrders] = useState([]);
@@ -36,11 +35,8 @@ const Order = (props) => {
     fetchPizzas();
   }, []);
   const handleOrder = (newOrder) => {
-    //   const { name, size } = newOrder;
-    //   const price = parseFloat(newOrder.price);
     const dummyState = [...orders];
     let orderRepeated = false;
-    //   const newOrderClassName = 'Order__line ' + name + '__' + size;
     dummyState.map(order => {
       if (order.name === newOrder.name && order.size === newOrder.size)
         orderRepeated = true;
@@ -48,25 +44,14 @@ const Order = (props) => {
     });
     if (!orderRepeated) { //if no such order in state
       newOrder.count = 1;
-      // newOrder.key = newOrder.name + '__' + newOrder.size;
       setOrders((prevState) => [...prevState, newOrder]);
-
-      // const line = name + ' ' + size + 'cm, ' + newOrder.count + ' sztuk, cena: ' + price.toFixed(2) + ' zł';
-      // let newOrderLine = document.createElement('p');
-      // newOrderLine.className = newOrderClassName;
-      // newOrderLine.innerText = line;
-      // newOrderLine.onclick = (e, name, size) => handleRemoveFromOrder(e.target, name, size);
-      // document.getElementsByClassName('Order__selected')[0].appendChild(newOrderLine);
     }
     else if (orderRepeated) { //if already such order in state (repeated, non custom)
       let orderIndex = dummyState.findIndex((order => order.name === newOrder.name && order.size === newOrder.size)); //find specific order
       if (dummyState[orderIndex].count < 100) { //if amount of orders doesnt exceed the limit
         dummyState[orderIndex].count += 1; //count this one
-        // console.log(typeof dummyState[orderIndex].price);
         dummyState[orderIndex].price = (parseFloat(dummyState[orderIndex].price) + parseFloat(newOrder.price)).toFixed(2);
-        // console.log("After update: ", dummyState[orderIndex])
         setOrders(dummyState);
-        // document.getElementsByClassName(newOrderClassName)[0].innerText = name + ' ' + size + 'cm, ' + dummyState[objIndex].count + ' sztuk, cena: ' + (dummyState[objIndex].price).toFixed(2) + ' zł';
       }
       else
         alert('Przepraszamy, ale nie przyjmujemy zamówień liczących więcej niz 100 sztuk danej pizzy.');
@@ -81,7 +66,6 @@ const Order = (props) => {
         orderIndex = dummyState.indexOf(x);
       return null;
     });
-    // console.log(orderIndex);
     if (dummyState[orderIndex].count > 1) {
       dummyState[orderIndex].count -= 1;
       dummyState[orderIndex].price = (basePrice * dummyState[orderIndex].count).toFixed(2);
@@ -116,7 +100,6 @@ const Order = (props) => {
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vesuvio} componentPrices={componentPrices} name='vesuvio' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.capricciosa} componentPrices={componentPrices} name='capricciosa' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vegetariana} componentPrices={componentPrices} name='vegetariana' />
-            {/* <OrderItem order={handleOrder} pizzaComponents={pizzasComponents} componentPrices={componentPrices} name='custom' /> */}
             <OrderCustom componentPrices={componentPrices}/>
           </div>
           : 'Wczytywanie...'

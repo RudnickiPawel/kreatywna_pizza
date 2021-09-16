@@ -1,36 +1,7 @@
 import { useState } from 'react';
 import Select from 'react-select';
-// import ananas from '../../../assets/ananas.jpg';
-// import boczek from '../../../assets/boczek.jpg';
-// import cebula from '../../../assets/cebula.jpg';
-// import drób from '../../../assets/drób.jpg';
-// import kukurydza from '../../../assets/kukurydza.jpg';
-// import mozarella from '../../../assets/mozarella.jpg';
-// import oliwki from '../../../assets/oliwki.jpg';
-// import oregano from '../../../assets/oregano.jpg';
-// import papryka from '../../../assets/papryka.jpg';
-// import pepperoni from '../../../assets/pepperoni.jpg';
-// import pieczarki from '../../../assets/pieczarki.jpg';
-// import rukola from '../../../assets/rukola.jpg';
-// import sosczosnkowy from '../../../assets/sosczosnkowy.jpg';
-// import sosketchupowy from '../../../assets/sosketchupowy.jpg';
-// import sosmajonezowy from '../../../assets/sosmajonezowy.jpg';
-// import sospomidorowy from '../../../assets/sospomidorowy.jpg';
-// import sosśmietanowy from '../../../assets/sosśmietanowy.jpg';
-// import szynka from '../../../assets/szynka.jpg';
-// import wieprzowina from '../../../assets/wieprzowina.jpg';
-// import wołowina from '../../../assets/wołowina.jpg';
-
 
 const OrderItem = (props) => {
-  function importAll(r) {         
-    return r.keys().map(r);       
-  }              
-  const images = importAll(require.context('../../../assets', false, /\.(jpg)$/));       
-  const imageArray = images.map(function(image) {         
-    return <img key={image} src={image} />;       
-  });
-  // console.log(imageArray);
   const options = [
     { value: 30, label: '30cm' },
     { value: 40, label: '40cm' },
@@ -95,13 +66,11 @@ const OrderItem = (props) => {
   const itemname = props.name;
   let price;
   const pizzaComponents = props.pizzaComponents.replace(/\s/g, '').split(',');
-  // console.log()
-  console.log(pizzaComponents);
-  // console.log(props.pizzaComponents.replace(/\s/g,''));
-  // props.pizzaComponents.map(component => console.log(component));
+  let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index);
+  const componentDuplicates = findDuplicates(pizzaComponents);
+  let componentAlreadyDisplayed = [];
   if (selectedOption)
     price = calculatePrice(props.pizzaComponents, props.componentPrices, selectedOption);
-    // const showIt = imageArray[0];
   return (
     <div className={'OrderItem ' + itemname}>
       <div className='OrderItem__name'>{itemname.toUpperCase()}</div>
@@ -118,13 +87,21 @@ const OrderItem = (props) => {
       <p className="OrderItem__price">{selectedOption ? price + ' zł' : null}</p>
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, itemname, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
       <div className="OrderItem__components">
-        {pizzaComponents.map((component, index) =>
-          <div key={index} className="OrderItem__component">
-            <img className='OrderItem__image' src={require('../../../assets/' + component + '.jpg').default} alt={component} />
-            <div className="OrderItem__componentName">{component}</div>
-          </div>
-          
-        )}
+        {pizzaComponents.map((component, index) => {
+          if (!componentDuplicates.includes(component)) //if its not duplicate
+            return <div key={index} className="OrderItem__component">
+              <img className='OrderItem__image' src={require('../../../assets/' + component + '.jpg').default} alt={component} />
+              <div className="OrderItem__componentName">{'1 ' + component}</div>
+            </div>
+          else if (!componentAlreadyDisplayed.includes(component)) { //if it is duplicate and not displayed yet
+            componentAlreadyDisplayed.push(component);
+            return <div key={index} className="OrderItem__component">
+              <img className='OrderItem__image' src={require('../../../assets/' + component + '.jpg').default} alt={component} />
+              <div className="OrderItem__componentName">{componentDuplicates.filter(rep => rep === component).length + 1 + ' ' + component}</div>
+            </div>
+          }
+          return null
+        })}
       </div>
     </div>
   );

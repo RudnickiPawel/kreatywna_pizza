@@ -1,28 +1,7 @@
 import { useState } from 'react';
 import Select from 'react-select';
-// import ananas from '../../../assets/ananas.jpg';
-// import boczek from '../../../assets/boczek.jpg';
-// import cebula from '../../../assets/cebula.jpg';
-// import drób from '../../../assets/drób.jpg';
-// import kukurydza from '../../../assets/kukurydza.jpg';
-// import mozarella from '../../../assets/mozarella.jpg';
-// import oliwki from '../../../assets/oliwki.jpg';
-// import oregano from '../../../assets/oregano.jpg';
-// import papryka from '../../../assets/papryka.jpg';
-// import pepperoni from '../../../assets/pepperoni.jpg';
-// import pieczarki from '../../../assets/pieczarki.jpg';
-// import rukola from '../../../assets/rukola.jpg';
-// import sosczosnkowy from '../../../assets/sosczosnkowy.jpg';
-// import sosketchupowy from '../../../assets/sosketchupowy.jpg';
-// import sosmajonezowy from '../../../assets/sosmajonezowy.jpg';
-// import sospomidorowy from '../../../assets/sospomidorowy.jpg';
-// import sosśmietanowy from '../../../assets/sosśmietanowy.jpg';
-// import szynka from '../../../assets/szynka.jpg';
-// import wieprzowina from '../../../assets/wieprzowina.jpg';
-// import wołowina from '../../../assets/wołowina.jpg';
 
 const OrderCustom = (props) => {
-    // const pizzaComponents = ;
   const options = [
     { value: 30, label: '30cm' },
     { value: 40, label: '40cm' },
@@ -40,7 +19,7 @@ const OrderCustom = (props) => {
       color: state.isSelected ? '#fbaa03' : '#000',
       backgroundColor: state.isSelected ? 'rgba(0,0,0,0.1)' : 'inherit',
       cursor: 'pointer',
-      "&:hover": {
+      '&:hover': {
         color: '#fbaa03'
       },
     }),
@@ -48,7 +27,7 @@ const OrderCustom = (props) => {
       width: width,
       display: 'flex',
       cursor: 'pointer',
-      "&:hover": {
+      '&:hover': {
         backgroundColor: 'rgba(255,255,255,0.2)'
       },
     }),
@@ -62,7 +41,7 @@ const OrderCustom = (props) => {
       justifyContent: 'center',
     })
   }
-  const handleChange = selectedOption => {
+  const handleSelectChange = selectedOption => {
     setState({ selectedOption });
   };
   const handleAddToList = (setAnimateBtn, order, size, name, price) => {
@@ -78,11 +57,51 @@ const OrderCustom = (props) => {
     else
       alert('Wybierz rozmiar pizzy');
   };
-  // const handleAnimationEnded = (setAnimateBtn) => {
-  // ;
-  // };
+  const handleAmountChange = (componentName, upOrDown) => {
+    // const newAmount = document.getElementsByClassName('OrderCustom__amount')[0].innerText;
+    // if (upOrDown && newAmount <= 5) {
+    //   setComponents((prevState) => ({document.getElementsByClassName('OrderCustom__amount')[0]
+    //     ...prevState,
+    //     componentName: prevState[componentName] + 1
+    //   }));
+    // } else if (!newAmount < 0) {
+    //   setComponents((prevState) => ({
+    //     ...prevState,
+    //     componentName: prevState[componentName] - 1
+    //   }));
+    // } else return null;
+
+    console.log('updating: ' + upOrDown);
+    // { value: e.target.value });
+  }
+  // setObjectState((prevState) => ({
+  //   ...prevState,
+  //   secondKey: 'value',
+  // }));
+
   const [state, setState] = useState({ selectedOption: null });
-  const [components, setComponents] = useState({});
+  const [components, setComponents] = useState({
+    ananas: 0,
+    boczek: 0,
+    cebula: 0,
+    drób: 0,
+    kukurydza: 0,
+    mozarella: 0,
+    oliwki: 0,
+    oregano: 0,
+    papryka: 0,
+    pepperoni: 0,
+    pieczarki: 0,
+    rukola: 0,
+    sosczosnkowy: 0,
+    sosketchupowy: 0,
+    sosmajonezowy: 0,
+    sospomidorowy: 0,
+    sosśmietanowy: 0,
+    szynka: 0,
+    wieprzowina: 0,
+    wołowina: 0
+  });
   const [animateBtn, setAnimateBtn] = useState(false);
   const { selectedOption } = state;
   // const itemname = props.name;
@@ -91,27 +110,40 @@ const OrderCustom = (props) => {
   if (componentPrices) {
     // console.log();props.pizzaComponents.replace(/\s/g, '').split(',')
     componentNames = Object.keys(componentPrices);
-    componentNames = componentNames.map(comp => {return comp.replace(/\s/g, '')});
+    componentNames = componentNames.map(comp => { return comp.replace(/\s/g, '') });
     // componentNames = [...componentNames];
   }
   let price = 0;
   return (
     <div className='OrderCustom'>
-      <div className="OrderCustom__name">WŁASNA</div>
-      <div className="OrderItem__select">
+      <div className='OrderCustom__name'>WŁASNA</div>
+      <div className='OrderItem__select'>
         <Select
           width='100%'
           placeholder='rozmiar'
           styles={customStyles}
           value={selectedOption}
-          onChange={handleChange}
+          onChange={handleSelectChange}
           options={options}
         />
       </div>
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, props.name, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
-      {/* <div className="OrderCustom__component"></div> */}
       <div className='OrderCustom__components'>
-        {componentNames ? componentNames.map((componentName, index) => <div key={index} className='OrderCustom__component'><img className='OrderCustom__componentImage' src={require('../../../assets/' + componentName + '.jpg').default} alt='' /><div className='OrderCustom__componentName'>{componentName}</div></div>) : null}
+        {componentNames ? componentNames.map((componentName, index) => {
+          return <div key={index} className='OrderCustom__component'>
+            <img className='OrderCustom__componentImage' src={require('../../../assets/' + componentName + '.jpg').default} alt='' />
+            <div className='OrderCustom__componentName'>{componentName}</div>
+            <div className='OrderCustom__icon OrderCustom__icon--minus' onClick={() => setComponents((prevState) => ({
+              ...prevState,
+              componentName: prevState[componentName]-1
+            }))}></div>
+            <p className="OrderCustom__amount">{components[ananas]}</p>
+            <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => setComponents((prevState) => ({
+              ...prevState,
+              componentName: prevState[componentName]+1
+            }))}></div>
+          </div>
+        }) : null}
       </div>
     </div>
   );

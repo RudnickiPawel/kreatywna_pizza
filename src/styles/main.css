@@ -466,19 +466,23 @@ code {
   margin: 0% 5%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .OrderItem__component {
-  width: 25%;
+  width: 20%;
+  margin-bottom: 5%;
 }
 
 .OrderItem__componentName {
   font-size: 14px;
+  color: #fbaa03;
 }
 
 .OrderItem__image {
   width: 50px;
   height: 50px;
+  border-radius: 11%;
 }
 
 .Dropdown {
@@ -552,22 +556,20 @@ code {
 }
 
 .OrderCustom__components {
+  width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0% 5%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   margin-top: 20px;
 }
 
 .OrderCustom__component {
-  width: 100px;
-  padding: 20px;
+  width: 20%;
+  margin-bottom: 5%;
   cursor: pointer;
-  color: #fbaa03;
 }
 
 .OrderCustom__component:hover {
@@ -577,9 +579,32 @@ code {
 
 .OrderCustom__componentName {
   font-size: 14px;
+  color: #fbaa03;
 }
 
 .OrderCustom__componentImage {
   width: 50px;
   height: 50px;
+  border-radius: 11%;
+}
+
+.OrderCustom__amount {
+  width: 30%;
+}
+
+.OrderCustom__amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.OrderCustom__icon {
+  width: 50px;
+  height: 50px;
+}
+
+.OrderCustom__icon--minus {
+  background-color: red;
+}
+
+.OrderCustom__icon--plus {
+  background-color: green;
 }
