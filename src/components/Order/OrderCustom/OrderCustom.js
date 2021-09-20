@@ -57,27 +57,24 @@ const OrderCustom = (props) => {
     else
       alert('Wybierz rozmiar pizzy');
   };
-  // const handleAmountChange = (componentName, upOrDown) => {
-  // const newAmount = document.getElementsByClassName('OrderCustom__amount')[0].innerText;
-  // if (upOrDown && newAmount <= 5) {
-  //   setComponents((prevState) => ({document.getElementsByClassName('OrderCustom__amount')[0]
-  //     ...prevState,
-  //     componentName: prevState[componentName] + 1
-  //   }));
-  // } else if (!newAmount < 0) {
-  //   setComponents((prevState) => ({
-  //     ...prevState,
-  //     componentName: prevState[componentName] - 1
-  //   }));
-  // } else return null;
-
-  // console.log('updating: ' + upOrDown);
-  // { value: e.target.value });
-  // }
-  // setObjectState((prevState) => ({
-  //   ...prevState,
-  //   secondKey: 'value',
-  // }));
+  const calculatePrice = (components, compPrices, size) => {
+    let price = 10; //base price
+    const asArray = Object.entries(components);
+    const filtered = asArray.filter(([key, value]) => value > 0);
+    filtered.forEach(x => {
+      let [key, value] = x
+      let componentPrice = compPrices[key];
+      console.log('key: ' + key + ' value: ' + value + ' compPrice: ' + componentPrice);
+      price += value * componentPrice;
+    });
+    if (size.value === 40)
+      price *= 1.3;
+    else if (size.value === 50)
+      price *= 1.8;
+    else if (size.value === 60)
+      price *= 2.5;
+    return price.toFixed(2);
+  };
 
   const [state, setState] = useState({ selectedOption: null });
   const [components, setComponents] = useState({
@@ -105,15 +102,17 @@ const OrderCustom = (props) => {
   const [animateBtn, setAnimateBtn] = useState(false);
   const { selectedOption } = state;
   // const itemname = props.name;
+  let price;
+  if (selectedOption)
+    price = calculatePrice(components, props.componentPrices, selectedOption);
   const componentPrices = props.componentPrices;
   let componentNames;
   if (componentPrices) {
     // console.log();props.pizzaComponents.replace(/\s/g, '').split(',')
     componentNames = Object.keys(componentPrices);
-    componentNames = componentNames.map(comp => { return comp.replace(/\s/g, '') });
+    // componentNames = componentNames.map(comp => { return comp.replace(/\s/g, '') });
     // componentNames = [...componentNames];
   }
-  let price = 0;
   return (
     <div className='OrderCustom'>
       <div className='OrderCustom__name'>WŁASNA</div>
@@ -127,29 +126,33 @@ const OrderCustom = (props) => {
           options={options}
         />
       </div>
+      <p className="OrderCustom__price">{selectedOption ? price + ' zł' : null}</p>
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, props.name, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
       <div className='OrderCustom__components'>
         {componentNames ? componentNames.map((componentName, index) => {
+          let componentNameNoSpace = componentName.replace(/\s/g, '');
           return <div key={index} className='OrderCustom__component'>
-            <img className='OrderCustom__componentImage' src={require('../../../assets/' + componentName + '.jpg').default} alt='' />
+            <img className='OrderCustom__componentImage' src={require('../../../assets/' + componentNameNoSpace + '.jpg').default} alt='' />
             <div className='OrderCustom__componentName'>{componentName}</div>
-            <div className='OrderCustom__icon OrderCustom__icon--minus' onClick={() => {
-              let dummyState = { ...components };
-              if (dummyState[componentName] > 0) {
-                dummyState[componentName] -= 1;
-                setComponents(dummyState);
+            <div className="OrderCustom__container">
+              <div className='OrderCustom__icon OrderCustom__icon--minus' onClick={() => {
+                let dummyState = { ...components };
+                if (dummyState[componentNameNoSpace] > 0) {
+                  dummyState[componentNameNoSpace] -= 1;
+                  setComponents(dummyState);
+                }
               }
-            }
-            }></div>
-            <p className="OrderCustom__amount">{components[componentName]}</p>
-            <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => {
-              let dummyState = { ...components };
-              if (dummyState[componentName] < 5) {
-                dummyState[componentName] += 1;
-                setComponents(dummyState);
+              }></div>
+              <p className="OrderCustom__amount">{components[componentNameNoSpace]}</p>
+              <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => {
+                let dummyState = { ...components };
+                if (dummyState[componentNameNoSpace] < 5) {
+                  dummyState[componentNameNoSpace] += 1;
+                  setComponents(dummyState);
+                }
               }
-            }
-            }></div>
+              }></div>
+            </div>
           </div>
         }) : null}
       </div>

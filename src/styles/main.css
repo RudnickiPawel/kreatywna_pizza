@@ -529,6 +529,7 @@ code {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 590px) {
@@ -567,14 +568,23 @@ code {
 }
 
 .OrderCustom__component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 20%;
   margin-bottom: 5%;
   cursor: pointer;
 }
 
-.OrderCustom__component:hover {
+.OrderCustom__component:hover .OrderCustom__componentName {
   color: #fff;
-  background-color: rgba(251, 170, 3, 0.9);
 }
 
 .OrderCustom__componentName {
@@ -589,11 +599,21 @@ code {
 }
 
 .OrderCustom__amount {
-  width: 30%;
+  margin: 0 auto;
 }
 
 .OrderCustom__amount::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+.OrderCustom__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
 }
 
 .OrderCustom__icon {

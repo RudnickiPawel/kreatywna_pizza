@@ -66,9 +66,9 @@ const OrderItem = (props) => {
   const itemname = props.name;
   let price;
   let pizzaComponents = props.pizzaComponents.split(',').map(s => s.trim()); //with inner spaces
-  const pizzaComponentsNoWhitespaces = pizzaComponents.map(s => s.replace(/\s/g, '')); //without inner spaces
+  // const pizzaComponentsNoWhitespaces = pizzaComponents.map(s => s.replace(/\s/g, '')); //without inner spaces
   let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index);
-  const componentDuplicates = findDuplicates(pizzaComponentsNoWhitespaces);
+  const componentDuplicates = findDuplicates(pizzaComponents);
   let componentAlreadyDisplayed = [];
   if (selectedOption)
     price = calculatePrice(pizzaComponents, props.componentPrices, selectedOption);
@@ -88,16 +88,16 @@ const OrderItem = (props) => {
       <p className="OrderItem__price">{selectedOption ? price + ' zł' : null}</p>
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, itemname, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
       <div className="OrderItem__components">
-        {pizzaComponentsNoWhitespaces.map((component, index) => {
+        {pizzaComponents.map((component, index) => {
           if (!componentDuplicates.includes(component)) //if its not duplicate
             return <div key={index} className="OrderItem__component">
-              <img className='OrderItem__image' src={require('../../../assets/' + component + '.jpg').default} alt={component} />
+              <img className='OrderItem__image' src={require('../../../assets/' + component.replace(/\s/g, '') + '.jpg').default} alt={component} />
               <div className="OrderItem__componentName">{'1 ' + component}</div>
             </div>
           else if (!componentAlreadyDisplayed.includes(component)) { //if it is duplicate and not displayed yet
             componentAlreadyDisplayed.push(component);
             return <div key={index} className="OrderItem__component">
-              <img className='OrderItem__image' src={require('../../../assets/' + component + '.jpg').default} alt={component} />
+              <img className='OrderItem__image' src={require('../../../assets/' + component.replace(/\s/g, '') + '.jpg').default} alt={component} />
               <div className="OrderItem__componentName">{componentDuplicates.filter(rep => rep === component).length + 1 + ' ' + component}</div>
             </div>
           }
