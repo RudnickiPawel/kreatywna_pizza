@@ -57,7 +57,7 @@ const Order = (props) => {
         else
           alert('Przepraszamy, ale nie przyjmujemy zamówień liczących więcej niz 100 sztuk danej pizzy.');
       }
-    } 
+    }
     else { //CUSTOM PIZZA
       // let name = JSON.stringify(objectFlip(newOrder.components)).replace(/[^a-zżźćńółęąśŻŹĆĄŚĘŁÓŃA-Z0-9]/g, " ");
       // newOrder.name = JSON.stringify(newOrder.components).replace(/[{[]}]/g, ''); //NAME = components, getting rid of { }
@@ -83,22 +83,39 @@ const Order = (props) => {
       }
     }
   };
-  const handleRemoveFromOrder = (order) => {
+  const handleRemoveFromOrder = (order, isCustom) => {
+    // console.log(isCustom);
     const dummyState = [...orders];
     let orderIndex;
     let basePrice = order.price / order.count;
-    dummyState.map((x) => {
-      if (x.name === order.name && x.size === order.size)
-        orderIndex = dummyState.indexOf(x);
-      return null;
-    });
-    if (dummyState[orderIndex].count > 1) {
-      dummyState[orderIndex].count -= 1;
-      dummyState[orderIndex].price = (basePrice * dummyState[orderIndex].count).toFixed(2);
+    if (!isCustom) {
+      dummyState.map((x) => {
+        if (x.name === order.name && x.size === order.size)
+          orderIndex = dummyState.indexOf(x);
+        return null;
+      });
+      if (dummyState[orderIndex].count > 1) {
+        dummyState[orderIndex].count -= 1;
+        dummyState[orderIndex].price = (basePrice * dummyState[orderIndex].count).toFixed(2);
+      }
+      else
+        dummyState.splice(orderIndex, 1);
+      setOrders(dummyState);
+    } else
+    {
+      dummyState.map((x) => {
+        if (x.components === order.components && x.size === order.size)
+          orderIndex = dummyState.indexOf(x);
+        return null;
+      });
+      if (dummyState[orderIndex].count > 1) {
+        dummyState[orderIndex].count -= 1;
+        dummyState[orderIndex].price = (basePrice * dummyState[orderIndex].count).toFixed(2);
+      }
+      else
+        dummyState.splice(orderIndex, 1);
+      setOrders(dummyState);
     }
-    else
-      dummyState.splice(orderIndex, 1);
-    setOrders(dummyState);
   };
 
   return (
@@ -110,7 +127,12 @@ const Order = (props) => {
         <div className="Order__selected">
           {
             !(orders === null) ? orders.map(order =>
-              <div onClick={() => handleRemoveFromOrder(order)} key={order.name + '__' + order.size} className='Order__line'> {order.name + ' ' + order.size + 'cm, ' + order.count + ' sztuk, cena: ' + order.price + 'zł'}</div>
+              <div onClick={() => {
+                if (order.components)
+                  handleRemoveFromOrder(order, order.components)
+                else
+                  handleRemoveFromOrder(order)
+              }} key={!order.components ? order.name+ '__' + order.size : order.components+ '__' + order.size} className='Order__line'> {order.name + ' ' + order.size + 'cm, ' + order.count + ' sztuk, cena: ' + order.price + 'zł'}</div>
             ) : null
           }
         </div>
