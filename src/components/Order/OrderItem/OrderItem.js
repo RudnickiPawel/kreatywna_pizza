@@ -48,6 +48,7 @@ const OrderItem = (props) => {
   };
   const calculatePrice = (pizzaComponents, componentPrices, size) => {
     let price = 10; //base price
+    console.log(pizzaComponents);
     pizzaComponents.forEach(comp => {
       price += componentPrices[comp];
     });
@@ -65,12 +66,13 @@ const OrderItem = (props) => {
   const { selectedOption } = state;
   const itemname = props.name;
   let price;
-  const pizzaComponents = props.pizzaComponents.replace(/\s/g, '').split(',');
+  let pizzaComponents = props.pizzaComponents.split(',').map(s => s.trim()); //with inner spaces
+  const pizzaComponentsNoWhitespaces = pizzaComponents.map(s => s.replace(/\s/g, '')); //without inner spaces
   let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index);
-  const componentDuplicates = findDuplicates(pizzaComponents);
+  const componentDuplicates = findDuplicates(pizzaComponentsNoWhitespaces);
   let componentAlreadyDisplayed = [];
   if (selectedOption)
-    price = calculatePrice(props.pizzaComponents, props.componentPrices, selectedOption);
+    price = calculatePrice(pizzaComponents, props.componentPrices, selectedOption);
   return (
     <div className={'OrderItem ' + itemname}>
       <div className='OrderItem__name'>{itemname.toUpperCase()}</div>
@@ -87,7 +89,7 @@ const OrderItem = (props) => {
       <p className="OrderItem__price">{selectedOption ? price + ' zł' : null}</p>
       <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, itemname, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
       <div className="OrderItem__components">
-        {pizzaComponents.map((component, index) => {
+        {pizzaComponentsNoWhitespaces.map((component, index) => {
           if (!componentDuplicates.includes(component)) //if its not duplicate
             return <div key={index} className="OrderItem__component">
               <img className='OrderItem__image' src={require('../../../assets/' + component + '.jpg').default} alt={component} />

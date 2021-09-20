@@ -137,7 +137,7 @@ const OrderCustom = (props) => {
               ...prevState,
               componentName: prevState[componentName]-1
             }))}></div>
-            <p className="OrderCustom__amount">{components[ananas]}</p>
+            <p className="OrderCustom__amount">{components[componentName]}</p>
             <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => setComponents((prevState) => ({
               ...prevState,
               componentName: prevState[componentName]+1
