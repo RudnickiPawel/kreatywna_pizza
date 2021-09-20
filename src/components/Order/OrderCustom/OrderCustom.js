@@ -57,23 +57,23 @@ const OrderCustom = (props) => {
     else
       alert('Wybierz rozmiar pizzy');
   };
-  const handleAmountChange = (componentName, upOrDown) => {
-    // const newAmount = document.getElementsByClassName('OrderCustom__amount')[0].innerText;
-    // if (upOrDown && newAmount <= 5) {
-    //   setComponents((prevState) => ({document.getElementsByClassName('OrderCustom__amount')[0]
-    //     ...prevState,
-    //     componentName: prevState[componentName] + 1
-    //   }));
-    // } else if (!newAmount < 0) {
-    //   setComponents((prevState) => ({
-    //     ...prevState,
-    //     componentName: prevState[componentName] - 1
-    //   }));
-    // } else return null;
+  // const handleAmountChange = (componentName, upOrDown) => {
+  // const newAmount = document.getElementsByClassName('OrderCustom__amount')[0].innerText;
+  // if (upOrDown && newAmount <= 5) {
+  //   setComponents((prevState) => ({document.getElementsByClassName('OrderCustom__amount')[0]
+  //     ...prevState,
+  //     componentName: prevState[componentName] + 1
+  //   }));
+  // } else if (!newAmount < 0) {
+  //   setComponents((prevState) => ({
+  //     ...prevState,
+  //     componentName: prevState[componentName] - 1
+  //   }));
+  // } else return null;
 
-    console.log('updating: ' + upOrDown);
-    // { value: e.target.value });
-  }
+  // console.log('updating: ' + upOrDown);
+  // { value: e.target.value });
+  // }
   // setObjectState((prevState) => ({
   //   ...prevState,
   //   secondKey: 'value',
@@ -133,15 +133,23 @@ const OrderCustom = (props) => {
           return <div key={index} className='OrderCustom__component'>
             <img className='OrderCustom__componentImage' src={require('../../../assets/' + componentName + '.jpg').default} alt='' />
             <div className='OrderCustom__componentName'>{componentName}</div>
-            <div className='OrderCustom__icon OrderCustom__icon--minus' onClick={() => setComponents((prevState) => ({
-              ...prevState,
-              componentName: prevState[componentName]-1
-            }))}></div>
+            <div className='OrderCustom__icon OrderCustom__icon--minus' onClick={() => {
+              let dummyState = { ...components };
+              if (dummyState[componentName] > 0) {
+                dummyState[componentName] -= 1;
+                setComponents(dummyState);
+              }
+            }
+            }></div>
             <p className="OrderCustom__amount">{components[componentName]}</p>
-            <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => setComponents((prevState) => ({
-              ...prevState,
-              componentName: prevState[componentName]+1
-            }))}></div>
+            <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => {
+              let dummyState = { ...components };
+              if (dummyState[componentName] < 5) {
+                dummyState[componentName] += 1;
+                setComponents(dummyState);
+              }
+            }
+            }></div>
           </div>
         }) : null}
       </div>

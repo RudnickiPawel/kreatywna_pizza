@@ -48,7 +48,6 @@ const OrderItem = (props) => {
   };
   const calculatePrice = (pizzaComponents, componentPrices, size) => {
     let price = 10; //base price
-    console.log(pizzaComponents);
     pizzaComponents.forEach(comp => {
       price += componentPrices[comp];
     });
