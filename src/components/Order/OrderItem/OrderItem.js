@@ -112,7 +112,7 @@ const handleAddToList = (setAnimateBtn, order, size, name, price) => {
   if (size) {
     setAnimateBtn(true);
     const output = {
-      name: name,
+      name: name.toUpperCase(),
       size: size.value,
       price: price
     }

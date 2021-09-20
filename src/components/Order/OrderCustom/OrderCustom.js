@@ -44,27 +44,28 @@ const OrderCustom = (props) => {
   const handleSelectChange = selectedOption => {
     setState({ selectedOption });
   };
-  const handleAddToList = (setAnimateBtn, order, size, name, price) => {
+  const handleAddToList = (setAnimateBtn, order, size, name, price, pickedComponents) => {
     if (size) {
       setAnimateBtn(true);
       const output = {
-        name: name,
+        name: name.toUpperCase(),
         size: size.value,
+        components: pickedComponents, //looks like this: [[key, value],[key, value]] 
         price: price
       }
       order(output);
     }
     else
       alert('Wybierz rozmiar pizzy');
+    //reset components
   };
-  const calculatePrice = (components, compPrices, size) => {
+  const handleCalculatePrice = (filteredComps, compPrices, size) => {
     let price = 10; //base price
-    const asArray = Object.entries(components);
-    const filtered = asArray.filter(([key, value]) => value > 0);
-    filtered.forEach(x => {
+    filteredComps.forEach(x => {
       let [key, value] = x
+      if (key.includes('sos'))
+        key = 'sos ' + key.slice(3);
       let componentPrice = compPrices[key];
-      console.log('key: ' + key + ' value: ' + value + ' compPrice: ' + componentPrice);
       price += value * componentPrice;
     });
     if (size.value === 40)
@@ -74,6 +75,11 @@ const OrderCustom = (props) => {
     else if (size.value === 60)
       price *= 2.5;
     return price.toFixed(2);
+  };
+  const handleFilterPickedComponents = (components) => {
+    const asArray = Object.entries(components);
+    const filtered = asArray.filter(([key, value]) => value > 0);
+    return filtered;
   };
 
   const [state, setState] = useState({ selectedOption: null });
@@ -101,18 +107,16 @@ const OrderCustom = (props) => {
   });
   const [animateBtn, setAnimateBtn] = useState(false);
   const { selectedOption } = state;
-  // const itemname = props.name;
-  let price;
-  if (selectedOption)
-    price = calculatePrice(components, props.componentPrices, selectedOption);
+  let price, pickedComponents;
+  if (selectedOption) {
+    pickedComponents = handleFilterPickedComponents(components);
+    price = handleCalculatePrice(pickedComponents, props.componentPrices, selectedOption);
+  }
   const componentPrices = props.componentPrices;
   let componentNames;
-  if (componentPrices) {
-    // console.log();props.pizzaComponents.replace(/\s/g, '').split(',')
+  if (componentPrices) 
     componentNames = Object.keys(componentPrices);
-    // componentNames = componentNames.map(comp => { return comp.replace(/\s/g, '') });
-    // componentNames = [...componentNames];
-  }
+
   return (
     <div className='OrderCustom'>
       <div className='OrderCustom__name'>WŁASNA</div>
@@ -127,7 +131,10 @@ const OrderCustom = (props) => {
         />
       </div>
       <p className="OrderCustom__price">{selectedOption ? price + ' zł' : null}</p>
-      <div onClick={() => { handleAddToList(setAnimateBtn, props.order, selectedOption, props.name, price) }} onAnimationEnd={() => { setAnimateBtn(false) }} className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}>Dodaj</div>
+      <div className={animateBtn ? 'OrderItem__send button-animated' : 'OrderItem__send'}
+        onClick={() => {
+          handleAddToList(setAnimateBtn, props.order, selectedOption, 'WŁASNA', price, pickedComponents)
+        }} onAnimationEnd={() => { setAnimateBtn(false) }}>Dodaj</div>
       <div className='OrderCustom__components'>
         {componentNames ? componentNames.map((componentName, index) => {
           let componentNameNoSpace = componentName.replace(/\s/g, '');

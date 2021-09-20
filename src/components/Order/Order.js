@@ -37,24 +37,50 @@ const Order = (props) => {
   const handleOrder = (newOrder) => {
     const dummyState = [...orders];
     let orderRepeated = false;
-    dummyState.map(order => {
-      if (order.name === newOrder.name && order.size === newOrder.size)
-        orderRepeated = true;
-      return null;
-    });
-    if (!orderRepeated) { //if no such order in state
-      newOrder.count = 1;
-      setOrders((prevState) => [...prevState, newOrder]);
-    }
-    else if (orderRepeated) { //if already such order in state (repeated, non custom)
-      let orderIndex = dummyState.findIndex((order => order.name === newOrder.name && order.size === newOrder.size)); //find specific order
-      if (dummyState[orderIndex].count < 100) { //if amount of orders doesnt exceed the limit
-        dummyState[orderIndex].count += 1; //count this one
-        dummyState[orderIndex].price = (parseFloat(dummyState[orderIndex].price) + parseFloat(newOrder.price)).toFixed(2);
-        setOrders(dummyState);
+    if (!newOrder.components) {//if its not custom order(only custom stores components)
+      dummyState.map(order => {
+        if (order.name === newOrder.name && order.size === newOrder.size)
+          orderRepeated = true;
+        return null;
+      });
+      if (!orderRepeated) { //if no such order in state
+        newOrder.count = 1;
+        setOrders((prevState) => [...prevState, newOrder]);
       }
-      else
-        alert('Przepraszamy, ale nie przyjmujemy zamówień liczących więcej niz 100 sztuk danej pizzy.');
+      else if (orderRepeated) { //if already such order in state (repeated)
+        let orderIndex = dummyState.findIndex((order => order.name === newOrder.name && order.size === newOrder.size)); //find specific order
+        if (dummyState[orderIndex].count < 100) { //if amount of orders doesnt exceed the limit
+          dummyState[orderIndex].count += 1; //count this one
+          dummyState[orderIndex].price = (parseFloat(dummyState[orderIndex].price) + parseFloat(newOrder.price)).toFixed(2);
+          setOrders(dummyState);
+        }
+        else
+          alert('Przepraszamy, ale nie przyjmujemy zamówień liczących więcej niz 100 sztuk danej pizzy.');
+      }
+    } 
+    else { //CUSTOM PIZZA
+      // let name = JSON.stringify(objectFlip(newOrder.components)).replace(/[^a-zżźćńółęąśŻŹĆĄŚĘŁÓŃA-Z0-9]/g, " ");
+      // newOrder.name = JSON.stringify(newOrder.components).replace(/[{[]}]/g, ''); //NAME = components, getting rid of { }
+      // console.log(JSON.stringify(newOrder.components));
+      dummyState.map(order => {
+        if (order.size === newOrder.size && order.components === newOrder.components)
+          orderRepeated = true;
+        return null;
+      });
+      if (!orderRepeated) { //if no such order in state
+        newOrder.count = 1;
+        setOrders((prevState) => [...prevState, newOrder]);
+      }
+      else if (orderRepeated) { //if already such order in state (repeated)
+        let orderIndex = dummyState.findIndex((order => order.components === newOrder.components && order.size === newOrder.size)); //find specific order
+        if (dummyState[orderIndex].count < 100) { //if amount of orders doesnt exceed the limit
+          dummyState[orderIndex].count += 1; //count this one
+          dummyState[orderIndex].price = (parseFloat(dummyState[orderIndex].price) + parseFloat(newOrder.price)).toFixed(2);
+          setOrders(dummyState);
+        }
+        else
+          alert('Przepraszamy, ale nie przyjmujemy zamówień liczących więcej niz 100 sztuk danej pizzy.');
+      }
     }
   };
   const handleRemoveFromOrder = (order) => {
@@ -100,7 +126,7 @@ const Order = (props) => {
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vesuvio} componentPrices={componentPrices} name='vesuvio' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.capricciosa} componentPrices={componentPrices} name='capricciosa' />
             <OrderItem order={handleOrder} pizzaComponents={pizzasComponents.vegetariana} componentPrices={componentPrices} name='vegetariana' />
-            <OrderCustom componentPrices={componentPrices}/>
+            <OrderCustom order={handleOrder} componentPrices={componentPrices} />
           </div>
           : 'Wczytywanie...'
       }
