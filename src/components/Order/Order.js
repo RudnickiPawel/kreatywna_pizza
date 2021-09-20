@@ -59,11 +59,8 @@ const Order = (props) => {
       }
     }
     else { //CUSTOM PIZZA
-      // let name = JSON.stringify(objectFlip(newOrder.components)).replace(/[^a-zżźćńółęąśŻŹĆĄŚĘŁÓŃA-Z0-9]/g, " ");
-      // newOrder.name = JSON.stringify(newOrder.components).replace(/[{[]}]/g, ''); //NAME = components, getting rid of { }
-      // console.log(JSON.stringify(newOrder.components));
       dummyState.map(order => {
-        if (order.size === newOrder.size && order.components === newOrder.components)
+        if (order.size === newOrder.size && JSON.stringify(order.components) === JSON.stringify(newOrder.components))
           orderRepeated = true;
         return null;
       });
@@ -72,7 +69,7 @@ const Order = (props) => {
         setOrders((prevState) => [...prevState, newOrder]);
       }
       else if (orderRepeated) { //if already such order in state (repeated)
-        let orderIndex = dummyState.findIndex((order => order.components === newOrder.components && order.size === newOrder.size)); //find specific order
+        let orderIndex = dummyState.findIndex((order => JSON.stringify(order.components) === JSON.stringify(newOrder.components) && order.size === newOrder.size)); //find specific order
         if (dummyState[orderIndex].count < 100) { //if amount of orders doesnt exceed the limit
           dummyState[orderIndex].count += 1; //count this one
           dummyState[orderIndex].price = (parseFloat(dummyState[orderIndex].price) + parseFloat(newOrder.price)).toFixed(2);
@@ -84,7 +81,6 @@ const Order = (props) => {
     }
   };
   const handleRemoveFromOrder = (order, isCustom) => {
-    // console.log(isCustom);
     const dummyState = [...orders];
     let orderIndex;
     let basePrice = order.price / order.count;
@@ -101,8 +97,7 @@ const Order = (props) => {
       else
         dummyState.splice(orderIndex, 1);
       setOrders(dummyState);
-    } else
-    {
+    } else {
       dummyState.map((x) => {
         if (x.components === order.components && x.size === order.size)
           orderIndex = dummyState.indexOf(x);
@@ -132,7 +127,7 @@ const Order = (props) => {
                   handleRemoveFromOrder(order, order.components)
                 else
                   handleRemoveFromOrder(order)
-              }} key={!order.components ? order.name+ '__' + order.size : order.components+ '__' + order.size} className='Order__line'> {order.name + ' ' + order.size + 'cm, ' + order.count + ' sztuk, cena: ' + order.price + 'zł'}</div>
+              }} key={!order.components ? order.name + '__' + order.size : order.components + '__' + order.size} className='Order__line'> {order.name + ' ' + order.size + 'cm, ' + order.count + ' sztuk, cena: ' + order.price + 'zł'}</div>
             ) : null
           }
         </div>
