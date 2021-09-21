@@ -590,6 +590,7 @@ code {
 .OrderCustom__componentName {
   font-size: 14px;
   color: #fbaa03;
+  padding: 5px 0;
 }
 
 .OrderCustom__componentImage {
@@ -619,12 +620,27 @@ code {
 .OrderCustom__icon {
   width: 50px;
   height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .OrderCustom__icon--minus {
   background-color: red;
+  font-size: 90px;
 }
 
 .OrderCustom__icon--plus {
   background-color: green;
+  font-size: 50px;
+}
+
+.OrderCustom__price {
+  margin: 0;
 }

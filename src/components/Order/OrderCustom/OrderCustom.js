@@ -54,10 +54,31 @@ const OrderCustom = (props) => {
         price: price
       }
       order(output);
+      setComponents({
+        ananas: 0,
+        boczek: 0,
+        cebula: 0,
+        drób: 0,
+        kukurydza: 0,
+        mozarella: 0,
+        oliwki: 0,
+        oregano: 0,
+        papryka: 0,
+        pepperoni: 0,
+        pieczarki: 0,
+        rukola: 0,
+        sosczosnkowy: 0,
+        sosketchupowy: 0,
+        sosmajonezowy: 0,
+        sospomidorowy: 0,
+        sosśmietanowy: 0,
+        szynka: 0,
+        wieprzowina: 0,
+        wołowina: 0
+      });
     }
     else
       alert('Wybierz rozmiar pizzy');
-    //reset components
   };
   const handleCalculatePrice = (filteredComps, compPrices, size) => {
     let price = 10; //base price
@@ -149,7 +170,7 @@ const OrderCustom = (props) => {
                   setComponents(dummyState);
                 }
               }
-              }></div>
+              }>-</div>
               <p className="OrderCustom__amount">{components[componentNameNoSpace]}</p>
               <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => {
                 let dummyState = { ...components };
@@ -158,7 +179,7 @@ const OrderCustom = (props) => {
                   setComponents(dummyState);
                 }
               }
-              }></div>
+              }>+</div>
             </div>
           </div>
         }) : null}
