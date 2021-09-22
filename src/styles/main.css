@@ -372,6 +372,92 @@ code {
   border: 1px solid #fbaa03;
 }
 
+.Order__goToForm {
+  color: #fff;
+  font-size: 24px;
+  background-color: green;
+  border: 2px solid #fff;
+  width: 296px;
+  margin: 0 auto 20px;
+}
+
+.Order__goToCheckout {
+  position: fixed;
+  padding: 5px 15px;
+  color: #fff;
+  background-color: #fbaa03;
+  border: 2px solid #ffffff;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.Order__goToCheckout:hover {
+  color: #fbaa03;
+  background-color: #fff;
+  border-color: #fbaa03;
+}
+
+.Order__checkout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.Order__checkout label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 20px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media screen and (max-width: 420px) {
+  .Order__checkout label {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.Order__checkout-input {
+  width: 70%;
+}
+
+@media screen and (max-width: 420px) {
+  .Order__checkout-input {
+    width: auto;
+  }
+}
+
+.Order__send {
+  padding: 5px 20px;
+  color: #fff;
+  background-color: green;
+  border: 2px solid #ffffff;
+  width: 100px;
+  margin: 20px auto 0;
+  cursor: pointer;
+}
+
+.Order__send:hover {
+  color: green;
+  background-color: #fff;
+  border-color: green;
+}
+
 .OrderItem {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -430,6 +516,7 @@ code {
   cursor: pointer;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 590px) {

@@ -38,3 +38,62 @@
     font-size: 34px
     background-color: #000
     border: 1px solid #fbaa03
+
+  &__goToForm
+    color: #fff
+    font-size: 24px
+    background-color: green
+    border: 2px solid #fff
+    // margin-bottom: 20px
+    width: 296px
+    margin: 0 auto 20px
+
+  &__goToCheckout
+    position: fixed
+    padding: 5px 15px
+    color: #fff
+    background-color: #fbaa03
+    border: 2px solid #ffffff
+    top: 0
+    right: 0
+    font-size: 24px
+    font-weight: 600
+    cursor: pointer
+    &:hover
+      color: #fbaa03
+      background-color: #fff
+      border-color: #fbaa03
+
+  &__checkout
+    display: flex
+    flex-direction: column
+    max-width: 600px
+    width: 100%
+    margin: 0 auto
+    label
+      display: flex
+      // padding-left: 50px
+      // padding: 10px 0 0 50px
+      padding: 10px 20px
+      justify-content: space-between
+      @media screen and ( max-width: 420px )
+        flex-direction: column
+    &-input
+      width: 70%
+      @media screen and ( max-width: 420px )
+        width: auto
+      // margin-left: 20px
+      // width: -webkit-fill-available
+
+  &__send
+    padding: 5px 20px
+    color: #fff
+    background-color: green
+    border: 2px solid #ffffff
+    width: 100px
+    margin: 20px auto 0
+    cursor: pointer
+    &:hover
+      color: green
+      background-color: #fff
+      border-color: green
