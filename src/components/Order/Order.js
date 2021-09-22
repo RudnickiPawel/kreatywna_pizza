@@ -7,7 +7,6 @@ const Order = (props) => {
   const [componentPrices, setComponentPrices] = useState(null);
   const [pizzasComponents, setPizzasComponents] = useState(null);
   const [orders, setOrders] = useState([]);
-  const [toggleModal, setToggleModal] = useState(false);
   let totalPrice = 0.00;
   let showGoToCheckout = false;
   if (orders[0])
@@ -116,9 +115,6 @@ const Order = (props) => {
       setOrders(dummyState);
     }
   };
-  const handleToggleModal = (isModalVisible) => {
-    setToggleModal(isModalVisible);
-  };
 
   return (
     <div className='Order section'>
@@ -199,8 +195,7 @@ const Order = (props) => {
                 if(anyInputEmpty)
                   alert('Ups! Coś poszło nie tak! Upewnij się, że dane zostały wprowadzone prawidłowo.');
                 else
-                  alert('Zamówienie zostało wysłane!');
-                //normalnie w tym momencie robiona by była walidacja danych przez serwer, płatność i potem przechowanie danych w bazie danych na serwerze; ja jednak nie będę implementował tych funkcjonalności dla tego projektu; 
+                  alert('Zamówienie zostało wysłane!'); //normalnie w tym momencie robiona by była walidacja danych przez serwer, płatność i potem przechowanie danych w bazie danych na serwerze; ja jednak nie będę implementował tych funkcjonalności dla tego projektu; 
               }}>Wyślij</div>
             </div>
           </Fragment>
