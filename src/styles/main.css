@@ -580,17 +580,24 @@ code {
           align-items: center;
   width: 20%;
   margin-bottom: 5%;
-  cursor: pointer;
 }
 
-.OrderCustom__component:hover .OrderCustom__componentName {
-  color: #fff;
+@media screen and (max-width: 460px) {
+  .OrderCustom__component {
+    width: 33%;
+  }
 }
 
 .OrderCustom__componentName {
   font-size: 14px;
   color: #fbaa03;
   padding: 5px 0;
+}
+
+@media screen and (max-width: 590px) {
+  .OrderCustom__componentName {
+    height: 30px;
+  }
 }
 
 .OrderCustom__componentImage {
@@ -614,31 +621,34 @@ code {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100%;
 }
 
 .OrderCustom__icon {
-  width: 50px;
-  height: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  cursor: pointer;
+  width: 20px !important;
+  height: 20px !important;
+  padding: 5px;
+  font-weight: 600;
+}
+
+.OrderCustom__icon:hover {
+  color: #fff;
 }
 
 .OrderCustom__icon--minus {
+  color: red;
+}
+
+.OrderCustom__icon--minus:hover {
   background-color: red;
-  font-size: 90px;
 }
 
 .OrderCustom__icon--plus {
+  color: green;
+}
+
+.OrderCustom__icon--plus:hover {
   background-color: green;
-  font-size: 50px;
 }
 
 .OrderCustom__price {

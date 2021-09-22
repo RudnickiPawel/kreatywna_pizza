@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Select from 'react-select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const OrderCustom = (props) => {
   const options = [
@@ -135,7 +137,7 @@ const OrderCustom = (props) => {
   }
   const componentPrices = props.componentPrices;
   let componentNames;
-  if (componentPrices) 
+  if (componentPrices)
     componentNames = Object.keys(componentPrices);
 
   return (
@@ -163,23 +165,25 @@ const OrderCustom = (props) => {
             <img className='OrderCustom__componentImage' src={require('../../../assets/' + componentNameNoSpace + '.jpg').default} alt='' />
             <div className='OrderCustom__componentName'>{componentName}</div>
             <div className="OrderCustom__container">
-              <div className='OrderCustom__icon OrderCustom__icon--minus' onClick={() => {
-                let dummyState = { ...components };
-                if (dummyState[componentNameNoSpace] > 0) {
-                  dummyState[componentNameNoSpace] -= 1;
-                  setComponents(dummyState);
+              <FontAwesomeIcon icon={faMinus} className='OrderCustom__icon OrderCustom__icon--minus'
+                onClick={() => {
+                  let dummyState = { ...components };
+                  if (dummyState[componentNameNoSpace] > 0) {
+                    dummyState[componentNameNoSpace] -= 1;
+                    setComponents(dummyState);
+                  }
                 }
-              }
-              }>-</div>
+                } />
               <p className="OrderCustom__amount">{components[componentNameNoSpace]}</p>
-              <div className='OrderCustom__icon OrderCustom__icon--plus' onClick={() => {
-                let dummyState = { ...components };
-                if (dummyState[componentNameNoSpace] < 5) {
-                  dummyState[componentNameNoSpace] += 1;
-                  setComponents(dummyState);
+              <FontAwesomeIcon icon={faPlus} className='OrderCustom__icon OrderCustom__icon--plus'
+                onClick={() => {
+                  let dummyState = { ...components };
+                  if (dummyState[componentNameNoSpace] < 5) {
+                    dummyState[componentNameNoSpace] += 1;
+                    setComponents(dummyState);
+                  }
                 }
-              }
-              }>+</div>
+                } />
             </div>
           </div>
         }) : null}
