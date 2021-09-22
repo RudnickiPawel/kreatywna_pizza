@@ -138,6 +138,105 @@ code {
   src: local("HomemadeApple"), url(../assets/HomemadeApple-Regular.ttf) format("truetype");
 }
 
+.Footer {
+  border-top: 1px solid #fbaa03;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 540px) {
+  .Footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.Footer__container {
+  margin: 0 auto;
+  max-width: 250px;
+  color: #fbaa03;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.Footer__wrapper {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Footer__wrapper span {
+  color: #fff;
+  margin-left: auto;
+}
+
+.Footer__wrapper a {
+  text-decoration: none;
+  color: inherit;
+  margin-left: 10px;
+}
+
+.Footer__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  font-size: 17px;
+  margin-left: 30px;
+  position: relative;
+  font-family: HomemadeApple-Regular;
+  color: #fff;
+}
+
+@media screen and (max-width: 540px) {
+  .Footer__logo {
+    margin: 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.Footer__logo span {
+  color: #fbaa03;
+}
+
+.Footer__date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fbaa03;
+  margin-right: 30px;
+}
+
+@media screen and (max-width: 540px) {
+  .Footer__date {
+    margin: 0;
+    padding-top: 10px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
 .Hamburger {
   display: none;
   -webkit-box-orient: vertical;

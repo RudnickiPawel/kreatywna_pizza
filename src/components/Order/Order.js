@@ -186,13 +186,13 @@ const Order = (props) => {
               </label>
               <div className="Order__send" onClick={() => {
                 let anyInputEmpty = false;
-                let inputsValues = document.getElementsByClassName('Order__checkout-input'); //htmlCollection
-                inputsValues = [].slice.call(inputsValues); //turning into Array
-                inputsValues = inputsValues.map(input => {
+                [].slice.call(document.getElementsByClassName('Order__checkout-input')).map(input => {
+                  //getting inputs, converting htmlcollection into arrays and checking if empty
                   if (input.value === '')
                     anyInputEmpty = true;
+                  return null;
                 })
-                if(anyInputEmpty)
+                if (anyInputEmpty)
                   alert('Ups! Coś poszło nie tak! Upewnij się, że dane zostały wprowadzone prawidłowo.');
                 else
                   alert('Zamówienie zostało wysłane!'); //normalnie w tym momencie robiona by była walidacja danych przez serwer, płatność i potem przechowanie danych w bazie danych na serwerze; ja jednak nie będę implementował tych funkcjonalności dla tego projektu; 

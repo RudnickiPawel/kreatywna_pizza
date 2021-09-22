@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
 import Order from './components/Order/Order';
 import About from './components/About/About';
@@ -20,6 +21,7 @@ const Layout = () => {
     <div className="Layout">
       <Header section={handleSectionChange} />
       {state === 'Main' ? <Main section={handleSectionChange} /> : state === 'Order' ? <Order section={handleSectionChange} /> : state === 'About' ? <About section={handleSectionChange} /> : state === 'Career' ? <Career section={handleSectionChange} /> : state === 'Recommended' ? <Recommended section={handleSectionChange} /> : null}
+      <Footer />
     </div>
   );
 }

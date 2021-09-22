@@ -1,0 +1,51 @@
+.Footer
+  border-top: 1px solid #fbaa03
+  background-color: rgba(0, 0, 0, 0.7)
+  display: flex
+  flex-wrap: wrap
+  padding: 20px 0
+  @media screen and ( max-width: 540px )
+    flex-direction: column
+
+  &__container
+    margin: 0 auto
+    max-width: 250px
+    color: #fbaa03
+    display: inline-flex
+
+  &__wrapper
+    display: inline-flex
+    flex-direction: column
+    span
+      color: #fff
+      margin-left: auto
+    a
+      text-decoration: none
+      color: inherit
+      margin-left: 10px
+
+  &__logo
+    display: flex
+    align-items: center
+    text-decoration: none
+    font-size: 17px
+    margin-left: 30px
+    position: relative
+    font-family: HomemadeApple-Regular
+    color: #fff
+    @media screen and ( max-width: 540px )
+      margin: 0
+      justify-content: center
+
+    span
+      color: #fbaa03
+
+  &__date
+    display: flex
+    align-items: center
+    color: #fbaa03
+    margin-right: 30px
+    @media screen and ( max-width: 540px )
+      margin: 0
+      padding-top: 10px
+      justify-content: center
