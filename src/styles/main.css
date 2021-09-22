@@ -474,6 +474,12 @@ code {
   margin-bottom: 5%;
 }
 
+@media screen and (max-width: 460px) {
+  .OrderItem__component {
+    width: 33%;
+  }
+}
+
 .OrderItem__componentName {
   font-size: 14px;
   color: #fbaa03;
