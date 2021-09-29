@@ -192,8 +192,8 @@ const Order = (props) => {
                     anyInputEmpty = true;
                   return null;
                 })
-                if (anyInputEmpty)
-                  alert('Ups! Coś poszło nie tak! Upewnij się, że dane zostały wprowadzone prawidłowo.');
+                if (anyInputEmpty || !orders[0])
+                  alert('Ups! Coś poszło nie tak! Upewnij się, że dane zostały wprowadzone prawidłowo i pizza została dodana do listy.');
                 else
                   alert('Zamówienie zostało wysłane!'); //normalnie w tym momencie robiona by była walidacja danych przez serwer, płatność i potem przechowanie danych w bazie danych na serwerze; ja jednak nie będę implementował tych funkcjonalności dla tego projektu; 
               }}>Wyślij</div>

@@ -5,7 +5,6 @@ import Main from './components/Main/Main';
 import Order from './components/Order/Order';
 import About from './components/About/About';
 import Career from './components/Career/Career';
-import Recommended from './components/Recommended/Recommended';
 
 const Layout = () => {
   //state stores the name of component that needs to be shown
@@ -20,7 +19,7 @@ const Layout = () => {
   return (
     <div className="Layout">
       <Header section={handleSectionChange} />
-      {state === 'Main' ? <Main section={handleSectionChange} /> : state === 'Order' ? <Order section={handleSectionChange} /> : state === 'About' ? <About section={handleSectionChange} /> : state === 'Career' ? <Career section={handleSectionChange} /> : state === 'Recommended' ? <Recommended section={handleSectionChange} /> : null}
+      {state === 'Main' ? <Main section={handleSectionChange} /> : state === 'Order' ? <Order section={handleSectionChange} /> : state === 'About' ? <About section={handleSectionChange} /> : state === 'Career' ? <Career section={handleSectionChange} /> : null}
       <Footer />
     </div>
   );
