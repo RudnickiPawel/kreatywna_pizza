@@ -501,6 +501,12 @@ code {
   margin: 0 auto 20px;
 }
 
+.Order__goToForm:hover {
+  color: green;
+  background-color: #fff;
+  border-color: green;
+}
+
 .Order__goToCheckout {
   position: fixed;
   padding: 5px 15px;
