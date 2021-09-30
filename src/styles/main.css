@@ -43,8 +43,8 @@ code {
 
 .section__paragraph {
   font-size: 20px;
-  padding-bottom: 15px;
   z-index: 1;
+  padding: 15px 15px 0 15px;
 }
 
 .section__link {
