@@ -105,6 +105,8 @@ code {
 
 .googlemaps {
   margin-bottom: 30px;
+  height: 60vh;
+  width: 70%;
 }
 
 .googlemaps__marker {

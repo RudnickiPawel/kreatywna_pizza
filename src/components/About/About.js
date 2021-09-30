@@ -16,7 +16,7 @@ const About = (props) => {
   return (
     <div className='About section'>
       <div className='section__title'>O nas</div>
-      <div className='googlemaps' style={{ height: '60vh', width: '70%' }}>
+      <div className='googlemaps'>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
           defaultCenter={defaultProps.center}
