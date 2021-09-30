@@ -16,24 +16,6 @@ const Order = (props) => {
     return null;
   });
   useEffect(() => {
-    const fetchComponents = () => {
-      fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/components.json')
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          setComponentPrices(data);
-        });
-    };
-    const fetchPizzas = () => {
-      fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json')
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          setPizzasComponents(data);
-        });
-    };
     fetchComponents();
     fetchPizzas();
   }, []);
@@ -83,6 +65,25 @@ const Order = (props) => {
       }
     }
   };
+  const fetchComponents = () => {
+    fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/components.json')
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setComponentPrices(data);
+      });
+  };
+  const fetchPizzas = () => {
+    fetch('https://kreatywnapizza-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json')
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setPizzasComponents(data);
+      });
+  };
+
   const handleRemoveFromOrder = (order, isCustom) => {
     const dummyState = [...orders];
     let orderIndex;
