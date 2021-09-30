@@ -44,6 +44,7 @@ code {
 .section__paragraph {
   font-size: 20px;
   padding-bottom: 15px;
+  z-index: 1;
 }
 
 .section__link {
@@ -53,6 +54,11 @@ code {
 
 .section__link:hover {
   color: #fff;
+}
+
+.section__image {
+  width: 100%;
+  height: auto;
 }
 
 .colorOrange {
@@ -95,6 +101,17 @@ code {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
+}
+
+.googlemaps {
+  margin-bottom: 30px;
+}
+
+.googlemaps__marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 40%;
+  border: 4px solid #fbaa03;
 }
 
 .Header {
@@ -324,6 +341,7 @@ code {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  z-index: 2;
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
